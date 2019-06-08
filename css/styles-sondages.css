@@ -1,0 +1,10 @@
+.box{
+    margin-left: 200px;
+    margin-right: 100px;
+    border: 1px black solid;
+    background-color: rgba(0, 0, 0, 0.445);
+}
+
+.card-header{
+    background-color: rgba(0, 0, 0, 0.445);
+}

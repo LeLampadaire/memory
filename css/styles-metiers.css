@@ -1,0 +1,21 @@
+.box{
+    margin-left: 150px;
+    margin-right: 50px;
+    font-size: 13px;
+    border: 1px black solid;
+    background-color: rgba(0, 0, 0, 0.445);
+}
+
+th[scope="col"]{
+    color: white;
+    font-weight: bolder;
+    background-color: rgba(0, 0, 0, 0.493);
+}
+
+th, td{
+    color: white;
+}
+
+td{
+    text-align: center;
+}

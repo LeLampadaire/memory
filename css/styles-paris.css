@@ -1,0 +1,40 @@
+.box{
+    width: auto;
+    margin-left: 200px;
+    margin-right: 100px;
+    border: 1px black solid;
+    background-color: rgba(0, 0, 0, 0.445);
+}
+
+.width-100{
+    width: 100%;
+}
+
+.tailleBadge{
+    padding-right: 20px; 
+    padding-left: 20px; 
+    font-size: 20px;
+}
+
+hr {
+    height: 30px;
+    width: 80%;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+hr:before {
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
+
+#nav-accueil{
+    margin-bottom: 10px;
+}
