@@ -160,10 +160,26 @@ if(isset($_SESSION['idprofil'])){
           background-position: right; 
         }
 
+        #profil{
+          bottom: 115px;
+          background-color: rgb(255,255,255);
+          background-image: url('icons/icons-32/profil.png');
+          background-repeat: no-repeat;
+          background-position: right; 
+        }
+        
         #panel{
           bottom: 50px;
           background-color: rgb(140, 0, 255);
           background-image: url('icons/icons-32/panel.png');
+          background-repeat: no-repeat;
+          background-position: right; 
+        }
+        
+        #no-profil{
+          bottom: 50px;
+          background-color: rgb(255,255,255);
+          background-image: url('icons/icons-32/profil.png');
           background-repeat: no-repeat;
           background-position: right; 
         }
@@ -183,7 +199,10 @@ if(isset($_SESSION['idprofil'])){
           echo '<a href="paris.php" id="paris">Paris</a>'; 
           
           if($panel['id_rang'] != 1){
+            echo '<a href="profil.php" id="profil">Profil</a>'; 
             echo '<a href="panel.php" id="panel">Panel</a>';
+          }else{
+            echo '<a href="profil.php" id="no-profil">Profil</a>'; 
           }
         }else{
           echo '<a href="connexion.php" id="membres">Connexion</a>';

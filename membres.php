@@ -47,7 +47,11 @@
                     <td class="logo"><img class="logo-membre" src="<?php echo utf8_encode($donnees['classe_principale']);?>" alt="Logo"></td>
                     <?php echo "<td>" . utf8_encode($donnees['pseudo']) . "</td>"; ?>
                     <?php echo "<td>" . utf8_encode($donnees['prenom']) . "</td>"; ?>
-                    <?php echo "<td>" . utf8_encode($donnees['etude']) . "</td>"; ?>
+                    <?php   if(isset($donnees['etude'])){
+                                echo "<td>" . utf8_encode($donnees['etude']) . "</td>"; 
+                            }else{
+                                echo "<td>/</td>";
+                            } ?>
                     <?php   if(isset($donnees['travail'])){
                                 echo "<td>" . utf8_encode($donnees['travail']) . "</td>"; 
                             }else{
