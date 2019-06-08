@@ -45,6 +45,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<link rel="stylesheet" type="text/css" href="css/styles-tchat.css">
 </head>
 
 <body class="bg-secondary">
@@ -54,16 +55,13 @@
 		<?php require_once('header.php'); ?>
     <!-- HEADER -->
 
+		<h1 class="titre-page">Tchat</h1>
+
 		<!-- Contenu principale -->
-		<section class="container text-center mt-5 text-white principale">
+		<section class="thebody text-center text-white">
 
-			<div class="card text-center bg-dark">
+			<div class="text-center">
 
-				<div class="card-header">
-					<h2>Tchat</h2>
-				</div>
-
-				<div class="card-body">
 
 					<div class="row">
 
@@ -283,7 +281,6 @@
 
 					</div>
 
-				</div>
 
 			</div>
 
