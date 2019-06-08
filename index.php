@@ -22,7 +22,7 @@
 <body>
 
     <!-- HEADER -->
-    <?php require('header.php'); ?>
+    <?php require_once('header.php'); ?>
     <!-- HEADER -->
 
     <h1 class="titre-page">Accueil</h1>
@@ -30,8 +30,8 @@
     <?php foreach($accueil as $donnees){ ?>
         <div class="box">
             <?php 
-                echo "<h3>" . $donnees['titre'] . "</h3>"; 
-                echo $donnees['contenu'];
+                echo "<h3>" . utf8_encode($donnees['titre']) . "</h3>"; 
+                echo utf8_encode($donnees['contenu']);
             ?>
             <div class="datePublication text-muted">
                 <?php echo "Posté le " .$donnees['date_publication_fr']; ?>
@@ -40,7 +40,7 @@
     <?php } ?>
 
     <!-- FOOTER -->
-    <?php include('footer.php'); ?>
+    <?php require_once('footer.php'); ?>
     <!-- FOOTER -->
     
 </body>

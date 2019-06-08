@@ -5,13 +5,10 @@ if(isset($_SESSION['idprofil'])){
 
   //News -> Messagerie
 
-  $header_messagerie = mysqli_query($bdd, "SELECT idMsg, timestampMsg FROM tchat"); 
-  $header_messagerie = mysqli_fetch_array($header_messagerie, MYSQLI_ASSOC);
-
-  $dateExpiMessagerie = new DateTime($header_messagerie['date_envoi']);
-  $dateExpiMessagerie->add(new DateInterval('P7D'));
-
-  if($dateExpiMessagerie->format('Y-m-d') > $aujourdhui->format('Y-m-d')){
+  $message = mysqli_query($bdd, 'SELECT COUNT(idMsg) AS Msg FROM tchat WHERE idProfil_recepteur = '.$_SESSION['idprofil'].' AND lu = 0;');
+  $message = mysqli_fetch_array($message, MYSQLI_ASSOC);
+  
+  if($message['Msg'] != 0){
     $img_messagerie = "icons/icons-32/messagerie-new.png";
   }else{
     $img_messagerie = "icons/icons-32/messagerie.png";
@@ -180,7 +177,7 @@ if(isset($_SESSION['idprofil'])){
           echo '<a href="membres.php" id="membres">Membres</a>';
           echo '<a href="statistiques.php" id="statistiques">Statistiques</a>';
           echo '<a href="metiers.php" id="metiers">Métiers</a>';
-          echo '<a href="messagerie.php" id="messagerie">Messagerie</a>';
+          echo '<a href="tchat.php" id="messagerie">Messagerie</a>';
           echo '<a href="sondages.php" id="sondages">Sondages</a>';
           echo '<a href="popcorn.php" id="popcorn">Porcorn</a>';
           echo '<a href="paris.php" id="paris">Paris</a>'; 

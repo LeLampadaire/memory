@@ -44,7 +44,7 @@
             <tbody>
                 <?php foreach($membres as $donnees){ ?>
                 <tr>
-                    <td class="logo"><img class="logo-membre" src="icons/logo/<?php echo utf8_encode($donnees['classe_principale']);?>" alt="Logo"></td>
+                    <td class="logo"><img class="logo-membre" src="<?php echo utf8_encode($donnees['classe_principale']);?>" alt="Logo"></td>
                     <?php echo "<td>" . utf8_encode($donnees['pseudo']) . "</td>"; ?>
                     <?php echo "<td>" . utf8_encode($donnees['prenom']) . "</td>"; ?>
                     <?php echo "<td>" . utf8_encode($donnees['etude']) . "</td>"; ?>
