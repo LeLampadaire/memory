@@ -3,6 +3,13 @@
     require_once 'configuration.php';
     require_once 'dbb_connexion.php'; 
 
+	$Pseudo = $_SESSION['pseudo'];
+	$idPseudo = $_SESSION['idprofil'];
+
+	if(empty($_SESSION)){
+		header('Location: 404.php');
+    }
+    
     $membres = mysqli_query($bdd, "SELECT id, classe_principale, pseudo, prenom, etude, travail, region FROM membres ORDER BY pseudo ASC"); 
 ?>
 

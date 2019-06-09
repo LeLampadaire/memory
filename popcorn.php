@@ -3,6 +3,13 @@
     require_once 'configuration.php';
     require_once 'dbb_connexion.php'; 
 
+	$Pseudo = $_SESSION['pseudo'];
+	$idPseudo = $_SESSION['idprofil'];
+
+	if(empty($_SESSION)){
+		header('Location: 404.php');
+    }
+    
     $popcorn = mysqli_query($bdd, "SELECT id, option1, option2, option3, DATE_FORMAT(date_film, '%d/%m/%Y à %Hh%i') AS date_film_fr, film FROM popcorn ORDER BY id DESC"); 
     $popcorn = mysqli_fetch_array($popcorn, MYSQLI_ASSOC);
     $aujourdhui = new DateTime();

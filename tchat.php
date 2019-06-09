@@ -3,10 +3,10 @@
 	require_once 'configuration.php';
 	require_once 'dbb_connexion.php'; 
 
-	$idPseudo = $_SESSION['idprofil'];
 	$Pseudo = $_SESSION['pseudo'];
+	$idPseudo = $_SESSION['idprofil'];
 
-	if($idPseudo == NULL){
+	if(empty($_SESSION)){
 		header('Location: 404.php');
 	}
 	

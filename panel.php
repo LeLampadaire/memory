@@ -2,6 +2,14 @@
     session_start();
     require_once 'configuration.php';
     require_once 'dbb_connexion.php'; 
+    
+	$Pseudo = $_SESSION['pseudo'];
+	$idPseudo = $_SESSION['idprofil'];
+
+	if($_SESSION['id_rang'] == 1){
+		header('Location: 404.php');
+    }
+    
 ?>
 
 <!DOCTYPE html>

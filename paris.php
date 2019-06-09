@@ -3,6 +3,13 @@
     require_once 'configuration.php';
     require_once 'dbb_connexion.php'; 
 
+	$Pseudo = $_SESSION['pseudo'];
+	$idPseudo = $_SESSION['idprofil'];
+
+	if(empty($_SESSION)){
+		header('Location: 404.php');
+    }
+    
     $paris = mysqli_query($bdd, "SELECT id, titre, mise, choix1, choix2 FROM paris ORDER BY id DESC"); 
     $paris = mysqli_fetch_array($paris, MYSQLI_ASSOC);
 

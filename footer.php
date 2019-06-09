@@ -19,8 +19,16 @@
   </head>
 <body>
     <br><br>
-    <div class="card-footer text-center footerBottom" style="color: white;">
-        <?php echo $Footer; ?>
+    <div class="card-footer footerBottom" style="color: white;">
+        <div class="text-center"><?php echo $Footer; ?></div>
+        <?php if(!empty($_SESSION)){ ?>
+          <div style="position: fixed; bottom:5px; right:10px;">
+            <form action="deconnexion.php" method="POST">
+              <button type="submit" class="btn btn-outline-warning">Déconnexion</button>
+            </form>
+          </div>
+        <?php } ?>
     </div>
+    
 </body>
 </html>

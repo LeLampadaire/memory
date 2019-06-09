@@ -3,6 +3,13 @@
     require_once 'configuration.php';
     require_once 'dbb_connexion.php'; 
 
+	$Pseudo = $_SESSION['pseudo'];
+	$idPseudo = $_SESSION['idprofil'];
+
+	if(empty($_SESSION)){
+		header('Location: 404.php');
+    }
+    
     $metiers = mysqli_query($bdd, "SELECT id, id_membre, alchimiste, bijoutier, bricoleur, bucheron, chasseur, cordomage, cordonnier, costumage, tailleur, facomage, faconneur, forgemage, forgeron, joaillomage, mineur, paysan, pecheur, sculptemage, sculpteur FROM metiers"); 
 
     function functionMetiers($nomMetier){
