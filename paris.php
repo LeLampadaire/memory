@@ -22,6 +22,12 @@
             $ParticipantTotal++;
         }
     }
+
+    if(!empty($_POST)){
+        $id = $_POST['id'];
+        $choix = $_POST['choix'];
+        mysqli_query($bdd, 'INSERT INTO paris_participation (id, id_paris, id_membre, membre_choix) VALUES (NULL, '.$id.', '.$idPseudo.', "'.$choix.'");');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -147,7 +153,7 @@
                                                         <td>
                                                             <?php 
                                                                 foreach($affichageMembreParticipantChoix1 as $donnees_affichageMembreParticipantChoix1){
-                                                                    if($donnees_affichageChoix1['id_membre'] == $donnees_affichageMembreParticipantChoix1['id'] AND $donnees_affichageChoix1['membre_choix'] == 0 AND $paris['id'] == $donnees_affichageChoix1['id_paris']){
+                                                                    if($donnees_affichageChoix1['id_membre'] == $donnees_affichageMembreParticipantChoix1['id'] AND $donnees_affichageChoix1['membre_choix'] == "choix1" AND $paris['id'] == $donnees_affichageChoix1['id_paris']){
                                                                         echo $donnees_affichageMembreParticipantChoix1['pseudo'];
                                                                     }
                                                                 }
@@ -170,7 +176,7 @@
                                                         <td>
                                                             <?php 
                                                                 foreach($affichageMembreParticipantChoix2 as $donnees_affichageMembreParticipantChoix2){
-                                                                    if($donnees_affichageChoix2['id_membre'] == $donnees_affichageMembreParticipantChoix2['id'] AND $donnees_affichageChoix2['membre_choix'] == 1 AND $paris['id'] == $donnees_affichageChoix2['id_paris']){
+                                                                    if($donnees_affichageChoix2['id_membre'] == $donnees_affichageMembreParticipantChoix2['id'] AND $donnees_affichageChoix2['membre_choix'] == "choix2" AND $paris['id'] == $donnees_affichageChoix2['id_paris']){
                                                                         echo $donnees_affichageMembreParticipantChoix2['pseudo'];
                                                                     }
                                                                 }
@@ -209,7 +215,7 @@
 
                                                             $Participant1 = 0;
                                                             foreach($affichageParticipant1 as $donnees_affichageParticipant1){
-                                                                if($donnees_affichageParticipant1['id_paris'] == $paris['id'] AND $donnees_affichageParticipant1['membre_choix'] == 0){
+                                                                if($donnees_affichageParticipant1['id_paris'] == $paris['id'] AND $donnees_affichageParticipant1['membre_choix'] == "choix1"){
                                                                     $Participant1++;
                                                                 }
                                                             }
@@ -230,7 +236,7 @@
 
                                                             $Participant2 = 0;
                                                             foreach($affichageParticipant2 as $donnees_affichageParticipant2){
-                                                                if($donnees_affichageParticipant2['id_paris'] == $paris['id'] AND $donnees_affichageParticipant2['membre_choix'] == 1){
+                                                                if($donnees_affichageParticipant2['id_paris'] == $paris['id'] AND $donnees_affichageParticipant2['membre_choix'] == "choix2"){
                                                                     $Participant2++;
                                                                 }
                                                             }
@@ -271,8 +277,12 @@
 
             <div class="tab-pane fade text-center" id="nav-film" role="tabpanel" aria-labelledby="nav-film-tab">
 		    <br>
+                <?php 
+                    $vote = mysqli_query($bdd, 'SELECT * FROM paris_participation WHERE id_paris = '.$paris['id'].' AND id_membre = '.$idPseudo.'');
+                    $vote = mysqli_fetch_array($vote, MYSQLI_ASSOC);
+                ?>
 
-                <form>
+                <form action="" method="POST">
                     <p><a href="paris.php" class="badge badge-danger tailleBadge">Paris en cours : "<?php echo $paris['titre'] ?>"</a></p>
                     <p>La mise est de : <span class="badge badge-warning">"<?php echo number_format($paris['mise'], 0, ',', ' '); ?> K"</span></p>
                     <p>Pour le moment la cagnotte est de : <span class="badge badge-warning">"<?php echo number_format($Cagnotte, 0, ',', ' '); ?> K"</span></p>
@@ -283,25 +293,31 @@
                     
                     <p>Si vous participez, vous réservez la somme de <span class="badge badge-warning">"<?php echo number_format($paris['mise'], 0, ',', ' '); ?> K"</span> pour participer au paris !</p>
                     <div class="row">
-                            <div class="offset-5 col-1 bg-secondary border">
-                                <input class="form-check-input" type="radio" name="choix" id="choix1" value="option1" checked>
-                                <label class="form-check-label" for="choix1">
-                                    <?php echo $paris['choix1']; ?>
-                                </label>
-                            </div>
+                        <div class="offset-5 col-1 bg-secondary border">
+                            <label class="form-check-label" for="choix1" style="color: white;">
+                                <input class="form-check-input" type="radio" name="choix" id="choix1" value="choix1" checked <?php if($vote != NULL){ echo "disabled"; }?>>
+                                <?php echo $paris['choix1']; ?>
+                            </label>
+                        </div>
 
-                            <div class="col-1 bg-secondary border">
-                                <input class="form-check-input" type="radio" name="choix" id="choix2" value="option2">
-                                <label class="form-check-label" for="choix2">
-                                    <?php echo $paris['choix2']; ?>
-                                </label>
-                            </div>
+                        <div class="col-1 bg-secondary border">
+                            <label class="form-check-label" for="choix2" style="color: white;">
+                                <input class="form-check-input" type="radio" name="choix" id="choix2" value="choix2" <?php if($vote != NULL){ echo "disabled"; }?>>
+                                <?php echo $paris['choix2']; ?>
+                            </label>
+                        </div>
                     </div>
 
                     <br>
 
+                    <input type="hidden" value="<?php echo $paris['id']; ?>" name="id">
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="checkKama" required><label class="form-check-label" for="checkKama"><strong>Confirmez votre participation !</strong></label></div>
-                    <br><button type="submit" class="btn btn-danger">Participer !</button>
+                    <br>
+                    <?php if($vote != NULL){ 
+                        echo '<button class="btn btn-danger" type="button" disabled>Déjà participez !</button>';
+                    }else{
+                        echo '<button class="btn btn-primary" type="submit">Participez !</button>';
+                    } ?>
                 </form>
                 <br>
             </div>
