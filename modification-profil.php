@@ -89,7 +89,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="prenom">Prenom</span>
                                 </div>
-                                <input type="text" class="form-control" value="<?php echo utf8_encode($profil['prenom']); ?>" aria-label="prenom" aria-describedby="prenom" name="newprenom">
+                                <input type="text" class="form-control" value="<?php echo utf8_encode($profil['prenom']); ?>" aria-label="prenom" aria-describedby="prenom" name="newprenom" required>
                             </div>
 
                             <div class="input-group mb-3">
@@ -130,21 +130,21 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="pseudo">Pseudo</span>
                                 </div>
-                                <input type="text" class="form-control" value="<?php echo $profil['pseudo']; ?>" aria-label="pseudo" aria-describedby="pseudo" name="newpseudo">
+                                <input type="text" class="form-control" value="<?php echo $profil['pseudo']; ?>" aria-label="pseudo" aria-describedby="pseudo" name="newpseudo" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="mdp">Mot de passe</span>
                                 </div>
-                                <input type="password" class="form-control" placeholder="Nouveau mot de passe" aria-label="mdp" aria-describedby="mdp" name="mdp">
+                                <input type="password" class="form-control" placeholder="Nouveau mot de passe" aria-label="mdp" aria-describedby="mdp" name="mdp" required>
                             </div>
                             
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="mail">Mail</span>
                                 </div>
-                                <input type="text" class="form-control" value="<?php echo utf8_encode($profil['mail']); ?>" aria-label="mail" aria-describedby="mail" name="newmail">
+                                <input type="text" class="form-control" value="<?php echo utf8_encode($profil['mail']); ?>" aria-label="mail" aria-describedby="mail" name="newmail" required>
                             </div>
 
                             <div class="input-group mb-3">
