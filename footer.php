@@ -20,7 +20,7 @@
 <body>
     <br><br>
     <div class="card-footer footerBottom" style="color: white;">
-        <div class="text-center"><?php echo $Footer; ?></div>
+        <div class="text-center" style="margin-left: -150px;"><?php echo $Footer; ?></div>
         <?php if(!empty($_SESSION)){ ?>
           <div style="position: fixed; bottom:5px; right:10px;">
             <form action="deconnexion.php" method="POST">

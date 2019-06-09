@@ -10,10 +10,15 @@
 		header('Location: 404.php');
     }
     
-    $sondages = mysqli_query($bdd, "SELECT id, titre, option1, option2, option3, date_publication FROM sondage_questions ORDER BY date_publication DESC"); 
+    $sondages = mysqli_query($bdd, "SELECT * FROM sondage_questions ORDER BY date_publication DESC"); 
     $numbers = array("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine", "thirty", "thirty-one", "thirty-two", "thirty-three", "thirty-four", "thirty-five", "thirty-six", "thirty-seven", "thirty-eight", "thirty-nine", "forty", "forty-one", "forty-two", "forty-three", "forty-four", "forty-five", "forty-six", "forty-seven", "forty-eight", "forty-nine", "fifty", "fifty-one", "fifty-two", "fifty-three", "fifty-four", "fifty-five", "fifty-six", "fifty-seven", "fifty-eight", "fifty-nine", "sixty", "sixty-one", "sixty-two", "sixty-three", "sixty-four", "sixty-five", "sixty-six", "sixty-seven", "sixty-eight", "sixty-nine", "seventy", "seventy-one", "seventy-two", "seventy-three", "seventy-four", "seventy-five", "seventy-six", "seventy-seven", "seventy-eight", "seventy-nine", "eighty", "eighty-one", "eighty-two", "eighty-three", "eighty-four", "eighty-five", "eighty-six", "eighty-seven", "eighty-eight", "eighty-nine", "ninety", "ninety-one", "ninety-two", "ninety-three", "ninety-four", "ninety-five", "ninety-six", "ninety-seven", "ninety-eight", "ninety-nine", "hundred");
     $aujourdhui = new DateTime();
 
+    if(!empty($_POST)){
+        $id = $_POST['id'];
+        $option = $_POST['option'];
+        mysqli_query($bdd, 'INSERT INTO sondage_reponse(id, id_questions, choix, id_membres) VALUES (NULL, '.$id.', "'.$option.'", '.$idPseudo.');');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -60,32 +65,83 @@
                 </div>
 
                 <div id="<?php echo $numbers[$donnees['id']]; ?>" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <form>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="Radios" id="Radios1" value="option1" checked>
+                    <?php if($donnees['open'] == 1){ ?>
+
+                        <div class="card-body">
+                            <?php 
+                                $vote = mysqli_query($bdd, 'SELECT * FROM sondage_reponse WHERE id_questions = '.$donnees['id'].' AND id_membres = '.$idPseudo.'');
+                                $vote = mysqli_fetch_array($vote, MYSQLI_ASSOC);
+                            ?>
+                            <form action="" method="POST">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="option" value="option1" checked <?php if($vote != NULL){ echo "disabled"; }?>>
                                         <?php echo utf8_encode($donnees['option1']); ?>
                                     </label>
-                            </div>
+                                </div>
 
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="option" value="option2" <?php if($vote != NULL){ echo "disabled"; }?>>
                                         <?php echo utf8_encode($donnees['option2']); ?>
                                     </label>
-                            </div>
+                                </div>
 
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="Radios" id="Radios3" value="option3">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="option" value="option3" <?php if($vote != NULL){ echo "disabled"; }?>>
                                         <?php echo utf8_encode($donnees['option3']); ?>
                                     </label>
+                                </div>
+                                <input type="hidden" value="<?php echo $donnees['id']; ?>" name="id">
+                                <?php if($vote != NULL){ 
+                                    echo '<button class="btn btn-danger" type="button" disabled>Déjà voté !</button>';
+                                }else{
+                                    echo '<button class="btn btn-primary" type="submit">Votez !</button>';
+                                } ?>
+                            </form>
+                        </div>
+
+                    <?php }else{
+                        $choix = mysqli_query($bdd, 'SELECT id, titre, option1, option2, option3 FROM sondage_questions WHERE id = '.$donnees['id'].';');
+                        $choix = mysqli_fetch_array($choix, MYSQLI_ASSOC);
+
+                        $total1 = mysqli_query($bdd, 'SELECT COUNT(id_questions) as somme FROM sondage_reponse WHERE choix = "option1" AND id_questions = '.$donnees['id'].';');
+                        $total1 = mysqli_fetch_array($total1, MYSQLI_ASSOC);
+                        if($total1 == NULL){
+                            $total1 = 0;
+                        }else{
+                            $total1 = $total1['somme'];
+                        }
+                        
+                        $total2 = mysqli_query($bdd, 'SELECT COUNT(id_questions) as somme FROM sondage_reponse WHERE choix = "option2" AND id_questions = '.$donnees['id'].';');
+                        $total2 = mysqli_fetch_array($total2, MYSQLI_ASSOC);
+                        if($total2 == NULL){
+                            $total2 = 0;
+                        }else{
+                            $total2 = $total2['somme'];
+                        }
+                        
+                        $total3 = mysqli_query($bdd, 'SELECT COUNT(id_questions) as somme FROM sondage_reponse WHERE choix = "option3" AND id_questions = '.$donnees['id'].';');
+                        $total3 = mysqli_fetch_array($total3, MYSQLI_ASSOC);
+                        if($total3 == NULL){
+                            $total3 = 0;
+                        }else{
+                            $total3 = $total3['somme'];
+                        }
+
+                        ?>
+                        <div class="card-body">
+                            <div class="alert alert-primary" role="alert">
+                                <h6>Résultat :</h6><br>
+                                <p><?php echo 'Choix 1 -> '.utf8_encode($choix['option1']).' = '.$total1.' !'; ?></p>
+                                <p><?php echo 'Choix 2 -> '.utf8_encode($choix['option2']).' = '.$total2.' !'; ?></p>
+                                <p><?php echo 'Choix 3 -> '.utf8_encode($choix['option3']).' = '.$total3.' !'; ?></p>
+
                             </div>
-                            
-                            <button class="btn btn-primary" type="submit" value="Submit">Envoyé !</button>
-                        </form>
-                    </div>
+                        </div>
+                    
+                    <?php } ?>
                 </div>
             </div>
 
