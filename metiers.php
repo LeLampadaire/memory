@@ -10,16 +10,18 @@
 		header('Location: 404.php');
     }
     
-    $metiers = mysqli_query($bdd, "SELECT id, id_membre, alchimiste, bijoutier, bricoleur, bucheron, chasseur, cordomage, cordonnier, costumage, tailleur, facomage, faconneur, forgemage, forgeron, joaillomage, mineur, paysan, pecheur, sculptemage, sculpteur FROM metiers"); 
-
-    function functionMetiers($nomMetier){
-        if(isset($donnees_metiers['$nomMetier'])){
-            echo $donnees_metiers['$nomMetier'];
+    if(!empty($_POST)){
+        $post = $_POST['metier'];
+        if(empty($_POST['direction'])){
+            $direction = "DESC";
         }else{
-            echo "/";
+            $direction = $_POST['direction'];
         }
+        $metiers = mysqli_query($bdd, 'SELECT membres.pseudo, '.$post.' as niveau FROM metiers INNER JOIN membres ON(metiers.id_membre = membres.id) WHERE '.$post.' IS NOT NULL ORDER BY '.$post.' '.$direction.';');
+        $test = mysqli_fetch_array($metiers, MYSQLI_ASSOC);
+    }else{
+        $metiers = NULL;
     }
-
 ?>
 
 
@@ -45,71 +47,71 @@
     <h1 class="titre-page">Métiers</h1>
     
     <div class="box">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Alchimiste</th>
-                <th scope="col">Bijoutier</th>
-                <th scope="col">Bricoleur</th>
-                <th scope="col">Bucheron</th>
-                <th scope="col">Chasseur</th>
-                <th scope="col">Cordomage</th>
-                <th scope="col">Cordonnier</th>
-                <th scope="col">Costumage</th>
-                <th scope="col">Tailleur</th>
-                <th scope="col">Façomage</th>
-                <th scope="col">Façonneur</th>
-                <th scope="col">Forgemage</th>
-                <th scope="col">Forgeron</th>
-                <th scope="col">Joaillomage</th>
-                <th scope="col">Mineur</th>
-                <th scope="col">Paysan</th>
-                <th scope="col">Pêcheur</th>
-                <th scope="col">Sculptemage</th>
-                <th scope="col">Sculpteur</th>
-                </tr>
-            </thead>
+        <div class="mx-auto" style="width: 280px; padding-top: 10px;">
+            <form action="" method="POST">
+                <div class="input-group mb-3" style="width: 100%">
+                    <select name="metier">
+                        <option value="alchimiste">Alchimiste</option>
+                        <option value="bijoutier">Bijoutier</option>
+                        <option value="bricoleur">Bricoleur</option>
+                        <option value="bucheron">Bucheron</option>
+                        <option value="chasseur">Chasseur</option>
+                        <option value="cordomage">Cordomage</option>
+                        <option value="cordonnier">Cordonnier</option>
+                        <option value="costumage">Costumage</option>
+                        <option value="tailleur">Tailleur</option>
+                        <option value="facomage">Façomage</option>
+                        <option value="forgemage">Forgemage</option>
+                        <option value="forgeron">Forgeron</option>
+                        <option value="joaillomage">Joaillomage</option>
+                        <option value="mineur">Mineur</option>
+                        <option value="paysan">Paysan</option>
+                        <option value="pecheur">Pecheur</option>
+                        <option value="sculptemage">Sculptemage</option>
+                        <option value="sculpteur">Sculpteur</option>
+                    </select>
+                    
+                    <select name="direction">
+                        <option value="DESC" auto>Du + au -</option>
+                        <option value="ASC">Du - au +</option>
+                    </select>
+                    <div class="input-group-append">
+                        <input class="btn btn-outline-success" type="submit" value="Recherche">
+                    </div>
+                </div>
+            </form>
+        </div>
 
-            <tbody>
-                <?php 
-                    foreach($metiers as $donnees_metiers){ 
-                    $membres = $bdd->query("SELECT id, pseudo FROM membres"); ?>
-                <tr>
-                    <th class="border-secondary" scope="row">
-                        <?php 
-                            foreach($membres as $donnees_membres){
-                                if($donnees_metiers['id_membre'] == $donnees_membres['id']){
-                                    echo $donnees_membres['pseudo'];
-                                }
-                            }
-                        ?>
-                    </th>
-                    <td class='border-left border-secondary'><?php functionMetiers("alchimiste"); ?></td>
-                    <td class='border-left border-secondary'><?php functionMetiers("bijoutier"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("bricoleur"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("bucheron"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("chasseur"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("cordomage"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("cordonnier"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("costumage"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("tailleur"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("facomage"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("faconneur"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("forgemage"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("forgeron"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("joaillomage"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("mineur"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("paysan"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("pecheur"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("sculptemage"); ?></td> 
-                    <td class='border-left border-secondary'><?php functionMetiers("sculpteur"); ?></td> 
-                </tr>
-                
-                <?php } ?>
+        <hr>
 
-            </tbody>
-        </table>
+        <?php if($metiers != NULL){ ?>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"><?php echo ucfirst($_POST['metier']); ?></th>
+                        <th scope="col">Niveau <?php if($direction == "ASC"){ echo '\/'; }else{ echo '/\\'; } ?></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                            
+                    <?php 
+                        if($test != NULL){
+                            foreach($metiers as $donnees){
+                                echo '<tr>';
+                                    echo '<td class="text-left">'.$donnees['pseudo'].'</td>';
+                                    echo '<td class="text-left">'.$donnees['niveau'].'</td>';
+                                echo '</tr>';
+                            } 
+                        }else{
+                            echo '<div class="alert alert-danger text-center" role="alert">';
+                                echo "Il n'y a aucun membre avec le métier : ".ucfirst($post).".";
+                            echo '</div>';
+                        }
+                    ?>
+            </table>
+            
+        <?php } ?>
 
     </div>
 
