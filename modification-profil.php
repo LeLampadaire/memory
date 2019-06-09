@@ -87,7 +87,7 @@
                             
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="prenom">Prenom</span>
+                                    <span class="input-group-text" id="prenom">Prenom*</span>
                                 </div>
                                 <input type="text" class="form-control" value="<?php echo utf8_encode($profil['prenom']); ?>" aria-label="prenom" aria-describedby="prenom" name="newprenom" required>
                             </div>
@@ -128,30 +128,30 @@
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="pseudo">Pseudo</span>
+                                    <span class="input-group-text" id="pseudo">Pseudo*</span>
                                 </div>
                                 <input type="text" class="form-control" value="<?php echo $profil['pseudo']; ?>" aria-label="pseudo" aria-describedby="pseudo" name="newpseudo" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="mdp">Mot de passe</span>
+                                    <span class="input-group-text" id="mdp">Mot de passe*</span>
                                 </div>
-                                <input type="password" class="form-control" placeholder="Nouveau mot de passe" aria-label="mdp" aria-describedby="mdp" name="mdp" required>
+                                <input type="password" class="form-control" placeholder="Nouveau mot de passe" aria-label="mdp" aria-describedby="mdp" name="mdp">
                             </div>
                             
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="mail">Mail</span>
+                                    <span class="input-group-text" id="mail">Mail*</span>
                                 </div>
-                                <input type="text" class="form-control" value="<?php echo utf8_encode($profil['mail']); ?>" aria-label="mail" aria-describedby="mail" name="newmail" required>
+                                <input type="email" class="form-control" value="<?php echo utf8_encode($profil['mail']); ?>" aria-label="mail" aria-describedby="mail" name="newmail" required>
                             </div>
 
                             <div class="input-group mb-3">
                                 <img src="<?php echo $profil['classe_principale']; ?>" alt="Image" width="38px" height="38px">
 
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="image">Image de profil</span>
+                                    <span class="input-group-text" id="image">Image de profil*</span>
                                 </div>
 
                                 <select class="form-control" name="newimage" id="image" required>
@@ -177,6 +177,7 @@
                             </div>
 
                         </div>
+                        <p class="text-muted">* Champs obligatoire</p>
 
                     </div>
                     <button type="submit" class="btn btn-outline-success">Mettre à jour</button>

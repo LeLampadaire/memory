@@ -1,4 +1,4 @@
-﻿<?php 
+﻿<?php
 if(isset($_SESSION['idprofil'])){
   // Date du jour
   $aujourdhui = new DateTime();
@@ -54,9 +54,6 @@ if(isset($_SESSION['idprofil'])){
     $img_paris = "icons/icons-32/paris.png";
   }
 
-  //Panel
-  $panel = mysqli_query($bdd, 'SELECT id_rang FROM membres WHERE id='.$_SESSION['idprofil'].';');
-  $panel = mysqli_fetch_array($panel, MYSQLI_ASSOC);
   $connexion = 1;
 
 }else{
@@ -198,7 +195,7 @@ if(isset($_SESSION['idprofil'])){
           echo '<a href="popcorn.php" id="popcorn">Porcorn</a>';
           echo '<a href="paris.php" id="paris">Paris</a>'; 
           
-          if($panel['id_rang'] != 1){
+          if($_SESSION['id_rang'] != 1){
             echo '<a href="index-profil.php" id="profil">Profil</a>'; 
             echo '<a href="panel.php" id="panel">Panel</a>';
           }else{

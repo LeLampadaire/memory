@@ -105,7 +105,7 @@
                             } 
                         }else{
                             echo '<div class="alert alert-danger text-center" role="alert">';
-                                echo "Il n'y a aucun membre avec le métier : ".ucfirst($post).".";
+                                echo "Il n'y a aucun membre ayant le métier : ".ucfirst($post).".";
                             echo '</div>';
                         }
                     ?>
