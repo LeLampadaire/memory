@@ -199,10 +199,10 @@ if(isset($_SESSION['idprofil'])){
           echo '<a href="paris.php" id="paris">Paris</a>'; 
           
           if($panel['id_rang'] != 1){
-            echo '<a href="profil.php" id="profil">Profil</a>'; 
+            echo '<a href="index-profil.php" id="profil">Profil</a>'; 
             echo '<a href="panel.php" id="panel">Panel</a>';
           }else{
-            echo '<a href="profil.php" id="no-profil">Profil</a>'; 
+            echo '<a href="index-profil.php" id="no-profil">Profil</a>'; 
           }
         }else{
           echo '<a href="connexion.php" id="membres">Connexion</a>';

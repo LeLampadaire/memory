@@ -55,7 +55,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="icons/favicon.ico" />
-    <title><?php echo $NomSite; ?> - Profil</title>
+    <title><?php echo $NomSite; ?> - Modification profil</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -67,10 +67,10 @@
 <body>
 
     <!-- HEADER -->
-    <?php require_once('header.php'); ?>
+    <?php require_once('header-profil.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Profil</h1>
+    <h1 class="titre-page">Modification</h1>
 
     <section class="box text-center text-white principale">
         <div class="text-center">
