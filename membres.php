@@ -51,23 +51,23 @@
             <tbody>
                 <?php foreach($membres as $donnees){ ?>
                 <tr>
-                    <td class="logo"><img class="logo-membre" src="<?php echo utf8_encode($donnees['classe_principale']);?>" alt="Logo"></td>
-                    <?php echo "<td>" . utf8_encode($donnees['pseudo']) . "</td>"; ?>
-                    <?php echo "<td>" . utf8_encode($donnees['prenom']) . "</td>"; ?>
+                    <td class="logo"><img src="<?php echo utf8_encode($donnees['classe_principale']);?>" alt="Logo" width="80"></td>
+                    <?php echo "<td><br>" . utf8_encode($donnees['pseudo']) . "</td>"; ?>
+                    <?php echo "<td><br>" . utf8_encode($donnees['prenom']) . "</td>"; ?>
                     <?php   if(isset($donnees['etude'])){
-                                echo "<td>" . utf8_encode($donnees['etude']) . "</td>"; 
+                                echo "<td><br>" . utf8_encode($donnees['etude']) . "</td>"; 
                             }else{
-                                echo "<td>/</td>";
+                                echo "<td><br>/</td>";
                             } ?>
                     <?php   if(isset($donnees['travail'])){
-                                echo "<td>" . utf8_encode($donnees['travail']) . "</td>"; 
+                                echo "<td><br>" . utf8_encode($donnees['travail']) . "</td>"; 
                             }else{
-                                echo "<td>/</td>";
+                                echo "<td><br>/</td>";
                             } ?>
                     <?php   if(isset($donnees['region'])){
-                                echo "<td>" . utf8_encode($donnees['region']) . "</td>";
+                                echo "<td><br>" . utf8_encode($donnees['region']) . "</td>";
                             }else{
-                                echo "<td>/</td>";
+                                echo "<td><br>/</td>";
                             } ?>
                 </tr>
                 <?php } ?>

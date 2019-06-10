@@ -49,8 +49,8 @@
     <div class="box">
         <div class="mx-auto" style="width: 280px; padding-top: 10px;">
             <form action="" method="POST">
-                <div class="input-group mb-3" style="width: 100%">
-                    <select name="metier">
+                <div class="input-group mb-3" style="width: 100%;">
+                    <select name="metier" style="border-radius: 5px 0 0 5px;">
                         <option value="alchimiste">Alchimiste</option>
                         <option value="bijoutier">Bijoutier</option>
                         <option value="bricoleur">Bricoleur</option>
@@ -61,6 +61,7 @@
                         <option value="costumage">Costumage</option>
                         <option value="tailleur">Tailleur</option>
                         <option value="facomage">Façomage</option>
+                        <option value="faconneur">Façonneur</option>
                         <option value="forgemage">Forgemage</option>
                         <option value="forgeron">Forgeron</option>
                         <option value="joaillomage">Joaillomage</option>

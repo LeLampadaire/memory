@@ -97,7 +97,7 @@
             </div>
 
             <div class="tab-pane fade" id="nav-film" role="tabpanel" aria-labelledby="nav-film-tab">
-                <iframe src="<?php echo utf8_encode($popcorn['film']); ?>" height="800px" width="100%"></iframe>
+                <iframe src="<?php echo utf8_encode($popcorn['film']); ?>" height="800px" width="100%" allowfullscreen></iframe>
             </div>
         </div>
     </div>

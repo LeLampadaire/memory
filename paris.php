@@ -27,6 +27,7 @@
         $id = $_POST['id'];
         $choix = $_POST['choix'];
         mysqli_query($bdd, 'INSERT INTO paris_participation (id, id_paris, id_membre, membre_choix) VALUES (NULL, '.$id.', '.$idPseudo.', "'.$choix.'");');
+        header('Location: paris.php');
     }
 ?>
 
