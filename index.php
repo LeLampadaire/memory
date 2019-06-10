@@ -3,7 +3,7 @@
     require_once 'configuration.php';
     require_once 'dbb_connexion.php'; 
 
-    $accueil = mysqli_query($bdd, "SELECT id, titre, contenu, auteur, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i:%s') AS date_publication_fr FROM accueil ORDER BY date_publication DESC"); 
+    $accueil = mysqli_query($bdd, "SELECT id, titre, contenu, auteur, DATE_FORMAT(date_publication, '%d/%m/%Y à %Hh%i') AS date_publication_fr FROM accueil ORDER BY date_publication DESC"); 
 ?>
 
 <!DOCTYPE html>
