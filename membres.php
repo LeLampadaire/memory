@@ -52,7 +52,7 @@
                 <?php foreach($membres as $donnees){ ?>
                 <tr>
                     <td class="logo"><img src="<?php echo utf8_encode($donnees['classe_principale']);?>" alt="Logo" width="80"></td>
-                    <?php echo "<td><br>" . utf8_encode($donnees['pseudo']) . "</td>"; ?>
+                    <?php echo "<td><br><a href='profil.php?idprofil=".$donnees['id']."' alt='Page de profil'>" . utf8_encode($donnees['pseudo']) . "</a></td>"; ?>
                     <?php echo "<td><br>" . utf8_encode($donnees['prenom']) . "</td>"; ?>
                     <?php   if(isset($donnees['etude'])){
                                 echo "<td><br>" . utf8_encode($donnees['etude']) . "</td>"; 

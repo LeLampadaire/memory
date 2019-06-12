@@ -2,8 +2,16 @@
     margin-left: 200px;
     margin-right: 100px;
     margin-bottom: 25px;
-    padding: 30px;
+    padding: 20px;
     border: 1px black solid;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.445);
+}
+
+#info{
+    background-color: rgba(0, 0, 0, 0.445);
+}
+
+.logo{
+    width: 180px;
 }
