@@ -1,0 +1,126 @@
+<?php 
+    session_start();
+    require_once 'configuration.php';
+    require_once 'dbb_connexion.php'; 
+    
+	$Pseudo = $_SESSION['pseudo'];
+	$idPseudo = $_SESSION['idprofil'];
+
+	if($_SESSION['id_rang'] == 1){
+		header('Location: 404.php');
+    }
+
+    if(!empty($_POST['modification'])){
+        $modification = mysqli_query($bdd, 'SELECT * FROM sondage_questions WHERE id='.$_POST['modification'].';');
+        $modification = mysqli_fetch_array($modification, MYSQLI_ASSOC);
+    }else if(!empty($_POST['question'])){
+        
+        $question = $_POST['question'];
+
+        if(empty($_POST['choix1'])){
+            $choix1 = NULL;
+        }else{
+            $choix1 = $_POST['choix1'];
+        }
+        
+        if(empty($_POST['choix2'])){
+            $choix2 = NULL;
+        }else{
+            $choix2 = $_POST['choix2'];
+        }
+        
+        if(empty($_POST['choix3'])){
+            $choix3 = NULL;
+        }else{
+            $choix3 = $_POST['choix3'];
+        }
+
+        $date = date("Y-m-d");
+
+        if($question != NULL){
+            $test = mysqli_query($bdd, 'UPDATE sondage_questions SET titre="'.$question.'", option1="'.$choix1.'", option2="'.$choix2.'", option3="'.$choix3.'", date_publication="'.$date.'" WHERE id='.$_POST['id'].';');
+
+            if(empty($choix1)){
+                mysqli_query($bdd, 'UPDATE sondage_questions SET option1 = NULL WHERE sondage_questions.id = '.$_POST['id'].';');
+            }
+            if(empty($choix2)){
+                mysqli_query($bdd, 'UPDATE sondage_questions SET option2 = NULL WHERE sondage_questions.id = '.$_POST['id'].';');
+            }
+            if(empty($choix3)){
+                mysqli_query($bdd, 'UPDATE sondage_questions SET option3 = NULL WHERE sondage_questions.id = '.$_POST['id'].';');
+            }
+        }
+        header('Location: modification-sondages.php');
+    }else{
+        header('Location: modification-sondages.php');
+    }
+    
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="icons/favicon.ico" />
+    <title><?php echo $NomSite; ?> - Modification du sondage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styles-panel.css" />
+</head>
+<body>
+
+    <!-- HEADER -->
+    <?php require('header-panel.php'); ?>
+    <!-- HEADER -->
+
+    <h1 class="titre-page">Modification du sondage</h1>
+
+    <div class="box">
+        <form action="" method="POST">
+
+                <!-- Ajout d'un sondage -->
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="question">Question</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Question ..." value="<?php echo utf8_encode($modification['titre']); ?>" aria-label="question" aria-describedby="question" name="question">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="choix1">Choix 1</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Choix 1 ..." value="<?php echo utf8_encode($modification['option1']); ?>" aria-label="choix1" aria-describedby="choix1" name="choix1">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="choix2">Choix 2</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Choix 2 ..." value="<?php echo utf8_encode($modification['option2']); ?>" aria-label="choix2" aria-describedby="choix2" name="choix2">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="choix3">Choix 3</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Choix 3 ..." value="<?php echo utf8_encode($modification['option3']); ?>" aria-label="choix3" aria-describedby="choix3" name="choix3">
+                    </div>
+
+                    <input type="hidden" value="<?php echo $modification['id']; ?>" name="id">
+                    <button class="btn btn-primary" type="submit">Modification du sondage !</button>
+
+    
+        </form>
+    </div>
+
+    <!-- FOOTER -->
+    <?php include('footer.php'); ?>
+    <!-- FOOTER -->
+    
+</body>
+</html>

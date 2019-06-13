@@ -54,7 +54,7 @@
 					<form method="POST">
 						<?php
 							if ($error == 1) {
-								echo '<div class="alert alert-danger" role="alert">Pseudo ou mot de passe incorrect.</div>';	
+								echo '<div class="alert alert-danger" role="alert">Pseudo ou mot de passe incorrect.</div>';
 							}	
 						?>
 						<label>Nom de compte<br><input required type="text" name="pseudo"><br></label>

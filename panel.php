@@ -28,10 +28,24 @@
 <body>
 
     <!-- HEADER -->
-    <?php require('header.php'); ?>
+    <?php require('header-panel.php'); ?>
     <!-- HEADER -->
 
+    <h1 class="titre-page">Panel admin</h1>
 
+    <div class="box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <iframe src="https://discordapp.com/widget?id=245615623374110720&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+                </div>
+
+                <div class="col-8">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <?php include('footer.php'); ?>

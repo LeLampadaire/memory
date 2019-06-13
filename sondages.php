@@ -10,7 +10,7 @@
 		header('Location: 404.php');
     }
     
-    $sondages = mysqli_query($bdd, "SELECT * FROM sondage_questions ORDER BY date_publication DESC"); 
+    $sondages = mysqli_query($bdd, "SELECT * FROM sondage_questions ORDER BY id DESC"); 
     $numbers = array("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine", "thirty", "thirty-one", "thirty-two", "thirty-three", "thirty-four", "thirty-five", "thirty-six", "thirty-seven", "thirty-eight", "thirty-nine", "forty", "forty-one", "forty-two", "forty-three", "forty-four", "forty-five", "forty-six", "forty-seven", "forty-eight", "forty-nine", "fifty", "fifty-one", "fifty-two", "fifty-three", "fifty-four", "fifty-five", "fifty-six", "fifty-seven", "fifty-eight", "fifty-nine", "sixty", "sixty-one", "sixty-two", "sixty-three", "sixty-four", "sixty-five", "sixty-six", "sixty-seven", "sixty-eight", "sixty-nine", "seventy", "seventy-one", "seventy-two", "seventy-three", "seventy-four", "seventy-five", "seventy-six", "seventy-seven", "seventy-eight", "seventy-nine", "eighty", "eighty-one", "eighty-two", "eighty-three", "eighty-four", "eighty-five", "eighty-six", "eighty-seven", "eighty-eight", "eighty-nine", "ninety", "ninety-one", "ninety-two", "ninety-three", "ninety-four", "ninety-five", "ninety-six", "ninety-seven", "ninety-eight", "ninety-nine", "hundred");
     $aujourdhui = new DateTime();
 
@@ -73,26 +73,33 @@
                                 $vote = mysqli_fetch_array($vote, MYSQLI_ASSOC);
                             ?>
                             <form action="" method="POST">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="option" value="option1" checked <?php if($vote != NULL){ echo "disabled"; }?>>
-                                        <?php echo utf8_encode($donnees['option1']); ?>
-                                    </label>
-                                </div>
 
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="option" value="option2" <?php if($vote != NULL){ echo "disabled"; }?>>
-                                        <?php echo utf8_encode($donnees['option2']); ?>
-                                    </label>
-                                </div>
+                                <?php if($donnees['option1'] != NULL){ ?>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="option" value="option1" checked <?php if($vote != NULL){ echo "disabled"; }?>>
+                                            <?php echo utf8_encode($donnees['option1']); ?>
+                                        </label>
+                                    </div>
+                                <?php } ?>
 
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="option" value="option3" <?php if($vote != NULL){ echo "disabled"; }?>>
-                                        <?php echo utf8_encode($donnees['option3']); ?>
-                                    </label>
-                                </div>
+                                <?php if($donnees['option2'] != NULL){ ?>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="option" value="option2" <?php if($vote != NULL){ echo "disabled"; }?>>
+                                            <?php echo utf8_encode($donnees['option2']); ?>
+                                        </label>
+                                    </div>
+                                <?php } ?>
+                                
+                                <?php if($donnees['option3'] != NULL){ ?>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="option" value="option3" <?php if($vote != NULL){ echo "disabled"; }?>>
+                                            <?php echo utf8_encode($donnees['option3']); ?>
+                                        </label>
+                                    </div>
+                                <?php } ?>
                                 <input type="hidden" value="<?php echo $donnees['id']; ?>" name="id">
                                 <?php if($vote != NULL){ 
                                     echo '<button class="btn btn-danger" type="button" disabled>Déjà voté !</button>';
@@ -134,9 +141,9 @@
                         <div class="card-body">
                             <div class="alert alert-primary" role="alert">
                                 <h6>Résultat :</h6><br>
-                                <p><?php echo 'Choix 1 -> '.utf8_encode($choix['option1']).' = '.$total1.' !'; ?></p>
-                                <p><?php echo 'Choix 2 -> '.utf8_encode($choix['option2']).' = '.$total2.' !'; ?></p>
-                                <p><?php echo 'Choix 3 -> '.utf8_encode($choix['option3']).' = '.$total3.' !'; ?></p>
+                                <p><?php if($choix['option1'] != NULL){ echo 'Choix 1 -> '.utf8_encode($choix['option1']).' = '.$total1.' !'; } ?></p>
+                                <p><?php if($choix['option2'] != NULL){ echo 'Choix 2 -> '.utf8_encode($choix['option2']).' = '.$total2.' !'; }  ?></p>
+                                <p><?php if($choix['option3'] != NULL){ echo 'Choix 3 -> '.utf8_encode($choix['option3']).' = '.$total3.' !'; }  ?></p>
 
                             </div>
                         </div>
