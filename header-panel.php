@@ -61,6 +61,14 @@
           background-repeat: no-repeat;
           background-position: right; 
         }
+        
+        #rang{
+          top: 280px;
+          background-color: rgb(0, 175, 102);
+          background-image: url('icons/icons-32/membres.png');
+          background-repeat: no-repeat;
+          background-position: right; 
+        }
 
         #site{
           bottom: 50px;
@@ -78,6 +86,7 @@
       <a href="modification-sondages.php" id="sondages">Sondages</a>
       <a href="modification-popcorn.php" id="popcorn">Porcorn</a>
       <a href="modification-paris.php" id="paris">Paris</a>
+      <?php if($_SESSION['id_rang'] == 3){ echo '<a href="modification-rang.php" id="rang">Rang</a>'; } ?>
       <a href="index.php" id="site">Site</a>
     </div>
   </div>

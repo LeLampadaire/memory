@@ -27,3 +27,17 @@
     float: left;
     margin-bottom: 25px;
 }
+
+th[scope="col"]{
+    color: white;
+    font-weight: bolder;
+    background-color: rgba(0, 0, 0, 0.493);
+}
+
+th, td{
+    color: white;
+}
+
+td{
+    text-align: center;
+}
