@@ -85,9 +85,9 @@
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="question">Question</span>
+                    <span class="input-group-text" id="question">Question*</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Question ..." value="<?php echo utf8_encode($modification['titre']); ?>" aria-label="question" aria-describedby="question" name="question">
+                <input type="text" class="form-control" placeholder="Question ..." value="<?php echo utf8_encode($modification['titre']); ?>" aria-label="question" aria-describedby="question" name="question" required>
             </div>
 
             <div class="input-group mb-3">
@@ -111,6 +111,7 @@
                 <input type="text" class="form-control" placeholder="Choix 3 ..." value="<?php echo utf8_encode($modification['option3']); ?>" aria-label="choix3" aria-describedby="choix3" name="choix3">
             </div>
 
+            <p class="text-muted text-left">* Champs obligatoire</p>
             <input type="hidden" value="<?php echo $modification['id']; ?>" name="id">
             <button class="btn btn-primary" type="submit">Modification du sondage !</button>
         </form>

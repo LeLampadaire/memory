@@ -88,14 +88,14 @@
         <form action="" method="POST">
 
             <div class="form-row">
-                <!-- Ajout d'un sondage -->
+                <!-- Ajout d'un event popcorn -->
                 <div class="form-group col-md-6">
                     <h2>Ajout :</h2>
                     <?php
                         if ($error == 0) {
                             echo "<div class='alert alert-danger' role='alert'>Erreur dans l'ajout.</div>";
                         }else if($error == 1){
-                            echo "<div class='alert alert-success' role='alert'>Sondage ajouté avec succès !</div>";
+                            echo "<div class='alert alert-success' role='alert'>Event popcorn ajouté avec succès !</div>";
                         }
                     ?>
 
@@ -103,7 +103,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="date">Date*</span>
                         </div>
-                        <input type="datetime-local" class="form-control" placeholder="Date ..." aria-label="date" aria-describedby="date" name="date">
+                        <input type="datetime-local" class="form-control" placeholder="Date ..." aria-label="date" aria-describedby="date" name="date" required>
                     </div>
 
                     <div class="input-group mb-3">
@@ -140,7 +140,7 @@
                 </div>
             </form>
 
-            <!-- Affichage des sondages -->
+            <!-- Affichage des event popcorn -->
             <div class="form-group col-md-6">
                 <h2>Modification :</h2>
                 <?php 
@@ -149,7 +149,7 @@
                     foreach($affichage as $donnees){ ?>
 
                         <div class="input-group box-affichage" id="border">
-                            <div class="input-group-prepend" style="width: 460px;">
+                            <div class="input-group-prepend" style="width: 455px;">
                                 <span><?php echo $donnees['date_film']; ?></span>
                             </div>
                             

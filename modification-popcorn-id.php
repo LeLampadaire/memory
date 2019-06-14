@@ -91,9 +91,9 @@
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="date">Date</span>
+                    <span class="input-group-text" id="date">Date*</span>
                 </div>
-                <input type="datetime-local" class="form-control" placeholder="Date ..." value="<?php echo $date_input; ?>" aria-label="date" aria-describedby="date" name="date">
+                <input type="datetime-local" class="form-control" placeholder="Date ..." value="<?php echo $date_input; ?>" aria-label="date" aria-describedby="date" name="date" required>
             </div>
 
             <div class="input-group mb-3">
@@ -124,6 +124,7 @@
                 <input type="text" class="form-control" placeholder="Lien ..." value="<?php echo utf8_encode($modification['film']); ?>" aria-label="lien" aria-describedby="lien" name="lien">
             </div>
 
+            <p class="text-muted text-left">* Champs obligatoire</p>
             <input type="hidden" value="<?php echo $modification['id']; ?>" name="id">
             <button class="btn btn-primary" type="submit">Modification du popcorn !</button>
 

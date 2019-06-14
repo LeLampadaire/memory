@@ -104,7 +104,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="question">Question*</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Question ..." aria-label="question" aria-describedby="question" name="question">
+                        <input type="text" class="form-control" placeholder="Question ..." aria-label="question" aria-describedby="question" name="question" required>
                     </div>
 
                     <div class="input-group mb-3">
@@ -144,7 +144,7 @@
                     foreach($affichage as $donnees){ ?>
 
                         <div class="input-group box-affichage" id="border">
-                            <div class="input-group-prepend" style="width: 385px;">
+                            <div class="input-group-prepend" style="width: 380px;">
                                 <span><?php echo utf8_encode($donnees['titre']); ?></span>
                             </div>
                             
