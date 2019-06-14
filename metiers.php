@@ -44,7 +44,7 @@
     <?php require('header.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Métiers</h1>
+    <h1 class="titre-page" style="color: rgb(51, 255, 0);">Métiers</h1>
     
     <div class="box">
         <div class="mx-auto" style="width: 280px; padding-top: 10px;">

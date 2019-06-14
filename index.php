@@ -25,7 +25,7 @@
     <?php require_once('header.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Accueil</h1>
+    <h1 class="titre-page" style="color: rgb(255, 0, 0);">Accueil</h1>
     
     <?php foreach($accueil as $donnees){ ?>
         <div class="box">

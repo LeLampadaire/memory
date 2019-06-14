@@ -228,7 +228,7 @@
     <?php require_once('header-profil.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Modification des métiers</h1>
+    <h1 class="titre-page" style="color: rgb(245, 224, 35);">Modification des métiers</h1>
 
     <div class="box">
         <form action="" method="POST">

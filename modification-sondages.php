@@ -83,7 +83,7 @@
     <?php require('header-panel.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Ajout et modification d'un sondage</h1>
+    <h1 class="titre-page" style="color: rgb(255, 115, 0);">Ajout et modification d'un sondage</h1>
 
     <div class="box">
         

@@ -70,7 +70,7 @@
     <?php require('header.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Paris</h1>
+    <h1 class="titre-page" style="color: rgb(23, 162, 184);">Paris</h1>
 
     <div class="box">
         <nav>

@@ -51,7 +51,7 @@
     <?php require('header.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Sondages</h1>
+    <h1 class="titre-page" style="color: rgb(0, 238, 255);">Sondages</h1>
     
     <div class="box">
         <div id="accordion">

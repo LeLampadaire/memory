@@ -61,7 +61,7 @@
     <?php require('header.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Popcorn</h1>
+    <h1 class="titre-page" style="color: rgb(0, 119, 255);">Popcorn</h1>
 
     <div class="box">
         <nav>

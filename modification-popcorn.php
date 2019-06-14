@@ -82,7 +82,7 @@
     <?php require('header-panel.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Ajout et modification d'un event popcorn</h1>
+    <h1 class="titre-page" style="color: rgb(245, 224, 35);">Ajout et modification d'un event popcorn</h1>
 
     <div class="box">
         <form action="" method="POST">

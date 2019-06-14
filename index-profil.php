@@ -27,7 +27,7 @@
     <?php require_once('header-profil.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Panel profil</h1>
+    <h1 class="titre-page" style="color: rgb(255, 0, 0);">Panel profil</h1>
 
     <div class="box">
         <div class="container-fluid">

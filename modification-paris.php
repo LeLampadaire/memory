@@ -73,7 +73,7 @@
     <?php require('header-panel.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Ajout et modification d'un paris</h1>
+    <h1 class="titre-page" style="color: rgb(51, 255, 0);">Ajout et modification d'un paris</h1>
 
     <div class="box">
         

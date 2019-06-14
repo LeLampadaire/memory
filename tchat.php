@@ -55,7 +55,7 @@
 		<?php require_once('header.php'); ?>
     <!-- HEADER -->
 
-		<h1 class="titre-page">Tchat</h1>
+		<h1 class="titre-page" style="color: rgb(0, 175, 102);">Tchat</h1>
 
 		<!-- Contenu principale -->
 		<section class="thebody text-center text-white">

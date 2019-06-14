@@ -70,7 +70,7 @@
     <?php require_once('header-profil.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Modification du profil</h1>
+    <h1 class="titre-page" style="color: rgb(255, 115, 0);">Modification du profil</h1>
 
     <section class="box text-center text-white principale">
         <div class="text-center">

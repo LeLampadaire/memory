@@ -45,7 +45,7 @@
     <?php require('header.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Connexion</h1>
+    <h1 class="titre-page text-warning">Connexion</h1>
 
 		<section class="text-center text-white">
 			

@@ -31,7 +31,7 @@
     <?php require('header-panel.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Panel admin</h1>
+    <h1 class="titre-page" style="color: rgb(255, 0, 0);">Panel admin</h1>
 
     <div class="box">
         <div class="container-fluid">

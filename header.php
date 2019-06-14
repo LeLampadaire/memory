@@ -15,9 +15,9 @@ if(isset($_SESSION['idprofil'])){
   $message = mysqli_fetch_array($message, MYSQLI_ASSOC);
   
   if($message['Msg'] != 0){
-    $img_messagerie = "icons/icons-32/messagerie-new.png";
+    $img_tchat = "icons/icons-32/tchat-new.png";
   }else{
-    $img_messagerie = "icons/icons-32/messagerie.png";
+    $img_tchat = "icons/icons-32/tchat.png";
   }
 
   //News -> Sondage
@@ -137,10 +137,10 @@ if(isset($_SESSION['idprofil'])){
           background-position: right; 
         }
 
-        #messagerie{
+        #tchat{
           top: 280px;
           background-color: rgb(0, 175, 102);
-          background-image: url('<?php echo $img_messagerie ?>');
+          background-image: url('<?php echo $img_tchat ?>');
           background-repeat: no-repeat;
           background-position: right; 
         }
@@ -163,7 +163,7 @@ if(isset($_SESSION['idprofil'])){
 
         #paris{
           top: 475px;
-          background-color: rgb(35, 38, 245);
+          background-color: rgb(23, 162, 184);
           background-image: url('<?php echo $img_paris ?>');
           background-repeat: no-repeat;
           background-position: right; 
@@ -202,7 +202,7 @@ if(isset($_SESSION['idprofil'])){
           echo '<a href="membres.php" id="membres">Membres</a>';
           echo '<a href="statistiques.php" id="statistiques">Statistiques</a>';
           echo '<a href="metiers.php" id="metiers">Métiers</a>';
-          echo '<a href="tchat.php" id="messagerie">Messagerie</a>';
+          echo '<a href="tchat.php" id="tchat">Tchat</a>';
           echo '<a href="sondages.php" id="sondages">Sondages</a>';
           echo '<a href="popcorn.php" id="popcorn">Porcorn</a>';
           echo '<a href="paris.php" id="paris">Paris</a>'; 
@@ -213,8 +213,6 @@ if(isset($_SESSION['idprofil'])){
           }else{
             echo '<a href="index-profil.php" id="no-profil">Profil</a>'; 
           }
-        }else{
-          echo '<a href="connexion.php" id="membres">Connexion</a>';
         } ?>
     </div>
   </div>

@@ -34,7 +34,7 @@
     <?php require('header.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Statistiques</h1>
+    <h1 class="titre-page" style="color: rgb(245, 224, 35);">Statistiques</h1>
     
     <div class="box">
         <div id="accordion">

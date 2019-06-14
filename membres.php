@@ -33,7 +33,7 @@
     <?php require('header.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Membres</h1>
+    <h1 class="titre-page" style="color: rgb(255, 115, 0);">Membres</h1>
     
     <div class="box">
         <table class="table table-hover">
@@ -62,7 +62,7 @@
                     }else if($role['id'] == 3){
                         echo '<td><br><span class="badge badge-danger">'.utf8_encode($role['nom']).'</span></td>';
                     } ?>
-                    <?php echo "<td><br><a href='profil.php?idprofil=".$donnees['id']."' alt='Page de profil'>" . utf8_encode($donnees['pseudo']) . "</a></td>"; ?>
+                    <?php echo "<td><br><a href='profil.php?idprofil=".$donnees['id']."' alt='Page de profil' style='color: white; text-decoration: underline;'>" . utf8_encode($donnees['pseudo']) . "</a></td>"; ?>
                     <?php echo "<td><br>" . utf8_encode($donnees['prenom']) . "</td>"; ?>
                     <?php   if(isset($donnees['etude'])){
                                 echo "<td><br>" . utf8_encode($donnees['etude']) . "</td>"; 

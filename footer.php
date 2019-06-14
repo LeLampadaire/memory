@@ -8,7 +8,7 @@
     <style>
         .footerBottom{
             position: fixed;
-            z-index: 2;
+            z-index: 3;
             bottom: 0;
             margin-left: 120px;
             font-size: 16px;
@@ -22,9 +22,15 @@
     <div class="card-footer footerBottom" style="color: white;">
         <div class="text-center" style="margin-left: -150px;"><?php echo $Footer; ?></div>
         <?php if(!empty($_SESSION)){ ?>
-          <div style="position: fixed; bottom:5px; right:10px;">
+          <div style="position: fixed; bottom:5px; left:5px;">
             <form action="deconnexion.php" method="POST">
               <button type="submit" class="btn btn-outline-warning">Déconnexion</button>
+            </form>
+          </div>
+        <?php }else{ ?>
+          <div style="position: fixed; bottom:5px; left:5px;">
+            <form action="connexion.php" method="POST">
+              <button type="submit" class="btn btn-outline-warning">Connexion</button>
             </form>
           </div>
         <?php } ?>
