@@ -40,6 +40,7 @@
             <thead>
                 <tr>
                     <th scope="col">Classe principale</th>
+                    <th scope="col">Rang</th>
                     <th scope="col">Pseudo</th>
                     <th scope="col">Prénom</th>
                     <th scope="col">Étude</th>
@@ -49,9 +50,18 @@
             </thead>
 
             <tbody>
-                <?php foreach($membres as $donnees){ ?>
+                <?php foreach($membres as $donnees){ 
+                        $role = mysqli_query($bdd, 'SELECT rang.id as id, nom FROM membres INNER JOIN rang ON(membres.id_rang = rang.id) WHERE membres.id = '.$donnees['id'].';');
+                        $role = mysqli_fetch_array($role, MYSQLI_ASSOC); ?>
                 <tr>
                     <td class="logo"><img src="<?php echo utf8_encode($donnees['classe_principale']);?>" alt="Logo" width="80"></td>
+                    <?php if($role['id'] == 1){ 
+                        echo '<td><br><span class="badge badge-primary">'.utf8_encode($role['nom']).'</span></td>';
+                    }else if($role['id'] == 2){
+                        echo '<td><br><span class="badge badge-warning">'.utf8_encode($role['nom']).'</span></td>';
+                    }else if($role['id'] == 3){
+                        echo '<td><br><span class="badge badge-danger">'.utf8_encode($role['nom']).'</span></td>';
+                    } ?>
                     <?php echo "<td><br><a href='profil.php?idprofil=".$donnees['id']."' alt='Page de profil'>" . utf8_encode($donnees['pseudo']) . "</a></td>"; ?>
                     <?php echo "<td><br>" . utf8_encode($donnees['prenom']) . "</td>"; ?>
                     <?php   if(isset($donnees['etude'])){

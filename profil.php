@@ -20,6 +20,8 @@
     $travail = utf8_encode($donnee_profil['travail']);
     $region = utf8_encode($donnee_profil['region']);
     $date_inscription = strftime ("%d/%m/%Y à %H:%m",strtotime($donnee_profil['date_inscription']));
+    $role = mysqli_query($bdd, 'SELECT nom FROM membres INNER JOIN rang ON(membres.id_rang = rang.id) WHERE membres.id = '.$idprofil.';');
+    $role = mysqli_fetch_array($role, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +56,7 @@
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $pseudo; ?></h4>
                     <p class="card-text"><?php echo $bio; ?></p>
+                    <p class="card-text">Rang : <span class="badge badge-warning"><?php echo $role['nom']; ?></span></p>
                 </div>
 
                 <ul class="list-group list-group-flush">
