@@ -11,11 +11,12 @@
     }
 
     if(!empty($_POST['modification'])){
-        $modification = mysqli_query($bdd, 'SELECT * FROM sondage_questions WHERE id='.$_POST['modification'].';');
+        $modification = mysqli_query($bdd, 'SELECT * FROM popcorn WHERE id='.$_POST['modification'].';');
         $modification = mysqli_fetch_array($modification, MYSQLI_ASSOC);
-    }else if(!empty($_POST['question'])){
-        
-        $question = $_POST['question'];
+        $date_input = explode(" ",$modification['date_film']);
+        $date_input[1] = substr($date_input[1],0,5);
+        $date_input = "".$date_input[0]."T".$date_input[1]."";
+    }else if(!empty($_POST['id'])){
 
         if(empty($_POST['choix1'])){
             $choix1 = NULL;
@@ -35,24 +36,30 @@
             $choix3 = $_POST['choix3'];
         }
 
-        $date = date("Y-m-d");
-
-        if($question != NULL){
-            mysqli_query($bdd, 'UPDATE sondage_questions SET titre="'.utf8_decode($question).'", option1="'.utf8_decode($choix1).'", option2="'.utf8_decode($choix2).'", option3="'.utf8_decode($choix3).'", date_publication="'.$date.'" WHERE id='.$_POST['id'].';');
-
-            if(empty($choix1)){
-                mysqli_query($bdd, 'UPDATE sondage_questions SET option1 = NULL WHERE sondage_questions.id = '.$_POST['id'].';');
-            }
-            if(empty($choix2)){
-                mysqli_query($bdd, 'UPDATE sondage_questions SET option2 = NULL WHERE sondage_questions.id = '.$_POST['id'].';');
-            }
-            if(empty($choix3)){
-                mysqli_query($bdd, 'UPDATE sondage_questions SET option3 = NULL WHERE sondage_questions.id = '.$_POST['id'].';');
-            }
+        if(empty($_POST['lien'])){
+            $lien = NULL;
+        }else{
+            $lien = $_POST['lien'];
         }
-        header('Location: modification-sondages.php');
+
+        mysqli_query($bdd, 'UPDATE popcorn SET date_film = "'.$_POST['date'].'", option1 = "'.$choix1.'", option2 = "'.$choix2.'", option3 = "'.$choix3.'", film = "'.$lien.'" WHERE id='.$_POST['id'].';');
+
+        if(empty($choix1)){
+            mysqli_query($bdd, 'UPDATE popcorn SET option1 = NULL WHERE id = '.$_POST['id'].';');
+        }
+        if(empty($choix2)){
+            mysqli_query($bdd, 'UPDATE popcorn SET option2 = NULL WHERE id = '.$_POST['id'].';');
+        }
+        if(empty($choix3)){
+            mysqli_query($bdd, 'UPDATE popcorn SET option3 = NULL WHERE id = '.$_POST['id'].';');
+        }
+        if(empty($lien)){
+            mysqli_query($bdd, 'UPDATE popcorn SET film = NULL WHERE id = '.$_POST['id'].';');
+        }
+
+        header('Location: modification-popcorn.php');
     }else{
-        header('Location: modification-sondages.php');
+        header('Location: modification-popcorn.php');
     }
     
 ?>
@@ -63,7 +70,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="icons/favicon.ico" />
-    <title><?php echo $NomSite; ?> - Modification du sondage</title>
+    <title><?php echo $NomSite; ?> - Modification du popcorn</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
@@ -76,18 +83,17 @@
     <?php require('header-panel.php'); ?>
     <!-- HEADER -->
 
-    <h1 class="titre-page">Modification du sondage</h1>
+    <h1 class="titre-page">Modification de l'event popcorn</h1>
 
-    <div class="box">
+    <div class="box">    
+    
         <form action="" method="POST">
-
-            <!-- Ajout d'un sondage -->
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="question">Question</span>
+                    <span class="input-group-text" id="date">Date</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Question ..." value="<?php echo utf8_encode($modification['titre']); ?>" aria-label="question" aria-describedby="question" name="question">
+                <input type="datetime-local" class="form-control" placeholder="Date ..." value="<?php echo $date_input; ?>" aria-label="date" aria-describedby="date" name="date">
             </div>
 
             <div class="input-group mb-3">
@@ -111,10 +117,17 @@
                 <input type="text" class="form-control" placeholder="Choix 3 ..." value="<?php echo utf8_encode($modification['option3']); ?>" aria-label="choix3" aria-describedby="choix3" name="choix3">
             </div>
 
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="lien">Lien</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Lien ..." value="<?php echo utf8_encode($modification['film']); ?>" aria-label="lien" aria-describedby="lien" name="lien">
+            </div>
+
             <input type="hidden" value="<?php echo $modification['id']; ?>" name="id">
-            <button class="btn btn-primary" type="submit">Modification du sondage !</button>
+            <button class="btn btn-primary" type="submit">Modification du popcorn !</button>
+
         </form>
-        
         <button type="button" onClick="document.location.href = document.referrer" class="btn btn-outline-light" id="Retour">Retour</button><br>
     </div>
 

@@ -37,7 +37,7 @@
         $date = date("Y-m-d");
 
         if($question != NULL){
-            mysqli_query($bdd, 'INSERT INTO sondage_questions (id, titre, open, option1, option2, option3, date_publication) VALUES (NULL, "'.$question.'", 1,  "'.$choix1.'", "'.$choix2.'", "'.$choix3.'",  "'.$date.'");');
+            mysqli_query($bdd, 'INSERT INTO sondage_questions (id, titre, open, option1, option2, option3, date_publication) VALUES (NULL, "'.utf8_decode($question).'", 1,  "'.utf8_decode($choix1).'", "'.utf8_decode($choix2).'", "'.utf8_decode($choix3).'",  "'.$date.'");');
             $max_id = mysqli_query($bdd, 'SELECT * FROM sondage_questions WHERE id = (SELECT MAX(id) FROM sondage_questions);');
             $max_id = mysqli_fetch_array($max_id, MYSQLI_ASSOC);
 
@@ -86,11 +86,11 @@
     <h1 class="titre-page">Ajout et modification d'un sondage</h1>
 
     <div class="box">
-        <form action="" method="POST">
-
-            <div class="form-row">
-                <!-- Ajout d'un sondage -->
-                <div class="form-group col-md-6">
+        
+        <div class="form-row">
+            <!-- Ajout d'un sondage -->
+            <div class="form-group col-md-6">
+                <form action="" method="POST">
                     <h2>Ajout :</h2>
                     <?php
                         if ($error == 0) {
@@ -102,7 +102,7 @@
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="question">Question</span>
+                            <span class="input-group-text" id="question">Question*</span>
                         </div>
                         <input type="text" class="form-control" placeholder="Question ..." aria-label="question" aria-describedby="question" name="question">
                     </div>
@@ -128,44 +128,47 @@
                         <input type="text" class="form-control" placeholder="Choix 3 ..." aria-label="choix3" aria-describedby="choix3" name="choix3">
                     </div>
 
+                    <p class="text-muted text-left">* Champs obligatoire</p>
+                    
                     <button class="btn btn-primary" type="submit">Création du sondage !</button>
-                </div>
-
-                <!-- Affichage des sondages -->
-                <div class="form-group col-md-6">
-                    <h2>Modification :</h2>
-                    <?php 
-                        $affichage = mysqli_query($bdd, 'SELECT id, titre, open FROM sondage_questions ORDER BY id DESC;');
-
-                        foreach($affichage as $donnees){ ?>
-
-                            <div class="input-group box-affichage" id="border">
-                                <div class="input-group-prepend" style="width: 385px;">
-                                    <span><?php echo utf8_encode($donnees['titre']); ?></span>
-                                </div>
-                                
-                                <form action="" method="POST">
-                                    <input type="hidden" value="<?php echo $donnees['id']; ?>" name="id">
-                                    <input type="hidden" value="<?php echo $donnees['open']; ?>" name="open">
-                                    <?php if($donnees['open'] == '1'){
-                                        echo '<button type="submit" class="btn btn-success" name="button" value="1">Ouvert</button>';
-                                    }else{
-                                        echo '<button type="submit" class="btn btn-danger" name="button" value="1">Fermé&nbsp;</button>';
-                                    } ?>
-                                </form>
-                                
-                                <form action="modification-sondages-id.php" method="POST">
-                                    <input type="hidden" value="<?php echo $donnees['id']; ?>" name="modification">
-                                    <button class="btn btn-primary" type="submit">Modification</button>
-                                </form>
-                            </div>
-                            <br>
-                            
-                        <?php } ?>
-                </div>
-    
+                </form>
+                
             </div>
-        </form>
+
+            <!-- Affichage des sondages -->
+            <div class="form-group col-md-6">
+                <h2>Modification :</h2>
+                <?php 
+                    $affichage = mysqli_query($bdd, 'SELECT id, titre, open FROM sondage_questions ORDER BY id DESC;');
+
+                    foreach($affichage as $donnees){ ?>
+
+                        <div class="input-group box-affichage" id="border">
+                            <div class="input-group-prepend" style="width: 385px;">
+                                <span><?php echo utf8_encode($donnees['titre']); ?></span>
+                            </div>
+                            
+                            <form action="" method="POST">
+                                <input type="hidden" value="<?php echo $donnees['id']; ?>" name="id">
+                                <input type="hidden" value="<?php echo $donnees['open']; ?>" name="open">
+                                <?php if($donnees['open'] == '1'){
+                                    echo '<button type="submit" class="btn btn-success" name="button" value="1">Ouvert</button>';
+                                }else{
+                                    echo '<button type="submit" class="btn btn-danger" name="button" value="1">Fermé&nbsp;</button>';
+                                } ?>
+                            </form>
+                            
+                            <form action="modification-sondages-id.php" method="POST">
+                                <input type="hidden" value="<?php echo $donnees['id']; ?>" name="modification">
+                                <button class="btn btn-primary" type="submit">Modification</button>
+                            </form>
+                        </div>
+                        <br>
+                        
+                <?php } ?>
+            </div>
+    
+        </div>
     </div>
 
     <!-- FOOTER -->

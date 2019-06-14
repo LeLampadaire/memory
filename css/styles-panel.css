@@ -21,3 +21,9 @@
 .box-affichage{
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+#Retour{
+    display: block;
+    float: left;
+    margin-bottom: 25px;
+}

@@ -65,26 +65,34 @@
                         $vote = mysqli_fetch_array($vote, MYSQLI_ASSOC);
                     ?>
                     <form action="" method="POST">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="option" value="option1" checked <?php if($vote != NULL){ echo "disabled"; }?>>
-                                <?php echo utf8_encode($popcorn['option1']); ?>
-                            </label>
-                        </div>
+                    
+                        <?php if($popcorn['option1'] != NULL){ ?>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="option" value="option1" checked <?php if($vote != NULL){ echo "disabled"; }?>>
+                                    <?php echo utf8_encode($popcorn['option1']); ?>
+                                </label>
+                            </div>
+                        <?php } ?>
 
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="option" value="option2" <?php if($vote != NULL){ echo "disabled"; }?>>
-                                <?php echo utf8_encode($popcorn['option2']); ?>
-                            </label>
-                        </div>
+                        <?php if($popcorn['option2'] != NULL){ ?>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="option" value="option2" <?php if($vote != NULL){ echo "disabled"; }?>>
+                                    <?php echo utf8_encode($popcorn['option2']); ?>
+                                </label>
+                            </div>
+                        <?php } ?>
 
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="option" value="option3" <?php if($vote != NULL){ echo "disabled"; }?>>
-                                <?php echo utf8_encode($popcorn['option3']); ?>
-                            </label>
-                        </div>
+                        <?php if($popcorn['option3'] != NULL){ ?>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="option" value="option3" <?php if($vote != NULL){ echo "disabled"; }?>>
+                                    <?php echo utf8_encode($popcorn['option3']); ?>
+                                </label>
+                            </div>
+                        <?php } ?>
+
                         <br>
                         <input type="hidden" value="<?php echo $popcorn['id']; ?>" name="id">
                         <?php if($vote != NULL){ 
