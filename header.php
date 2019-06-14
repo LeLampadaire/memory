@@ -55,7 +55,7 @@ if(isset($_SESSION['idprofil'])){
   $header_paris = mysqli_query($bdd, "SELECT id, date_fin FROM paris ORDER BY id DESC"); 
   $header_paris = mysqli_fetch_array($header_paris, MYSQLI_ASSOC);
 
-  $vote_paris = mysqli_query($bdd, 'SELECT * FROM paris_participation WHERE id_paris='.$header_paris['id'].' AND id_membre='.$_SESSION['idprofil'].';'); 
+  $vote_paris = mysqli_query($bdd, 'SELECT * FROM paris_participation WHERE id_paris='.$header_paris['id'].' AND id_membres='.$_SESSION['idprofil'].';'); 
   $vote_paris = mysqli_fetch_array($vote_paris, MYSQLI_ASSOC);
 
   $dateExpiParis = new DateTime($header_paris['date_fin']);

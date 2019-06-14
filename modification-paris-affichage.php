@@ -14,7 +14,7 @@
     $paris = mysqli_fetch_array($paris, MYSQLI_ASSOC);
     
     /* Participation totale */
-    $paris_participationTotal = mysqli_query($bdd, "SELECT id, id_paris, id_membre, membre_choix FROM paris_participation ORDER BY id ASC");
+    $paris_participationTotal = mysqli_query($bdd, "SELECT id, id_paris, id_membres, membre_choix FROM paris_participation ORDER BY id ASC");
 
     $ParticipantTotal = 0;
     foreach($paris_participationTotal as $donnees_participationTotal){
@@ -126,7 +126,7 @@
                         <table class="width-100">
                             <tbody>
                                 <?php
-                                    $affichageChoix1 = $bdd->query("SELECT id, id_paris, id_membre, membre_choix FROM paris_participation WHERE id_paris=".$_POST['affichage']." ORDER BY id ASC"); 
+                                    $affichageChoix1 = $bdd->query("SELECT id, id_paris, id_membres, membre_choix FROM paris_participation WHERE id_paris=".$_POST['affichage']." ORDER BY id ASC"); 
                                 
                                     foreach($affichageChoix1 as $donnees_affichageChoix1){ 
                                     $affichageMembreParticipantChoix1 = $bdd->query("SELECT id, pseudo FROM membres"); ?>
@@ -134,7 +134,7 @@
                                         <td>
                                             <?php 
                                                 foreach($affichageMembreParticipantChoix1 as $donnees_affichageMembreParticipantChoix1){
-                                                    if($donnees_affichageChoix1['id_membre'] == $donnees_affichageMembreParticipantChoix1['id'] AND $donnees_affichageChoix1['membre_choix'] == "choix1" AND $paris['id'] == $donnees_affichageChoix1['id_paris']){
+                                                    if($donnees_affichageChoix1['id_membres'] == $donnees_affichageMembreParticipantChoix1['id'] AND $donnees_affichageChoix1['membre_choix'] == "choix1" AND $paris['id'] == $donnees_affichageChoix1['id_paris']){
                                                         echo utf8_encode($donnees_affichageMembreParticipantChoix1['pseudo']);
                                                     }
                                                 }
@@ -149,7 +149,7 @@
                         <table class="width-100">
                             <tbody>
                                 <?php 
-                                    $affichageChoix2 = $bdd->query("SELECT id, id_paris, id_membre, membre_choix FROM paris_participation WHERE id_paris=".$_POST['affichage']." ORDER BY id ASC"); 
+                                    $affichageChoix2 = $bdd->query("SELECT id, id_paris, id_membres, membre_choix FROM paris_participation WHERE id_paris=".$_POST['affichage']." ORDER BY id ASC"); 
                                 
                                     foreach($affichageChoix2 as $donnees_affichageChoix2){ 
                                     $affichageMembreParticipantChoix2 = $bdd->query("SELECT id, pseudo FROM membres"); ?>
@@ -157,7 +157,7 @@
                                         <td>
                                             <?php 
                                                 foreach($affichageMembreParticipantChoix2 as $donnees_affichageMembreParticipantChoix2){
-                                                    if($donnees_affichageChoix2['id_membre'] == $donnees_affichageMembreParticipantChoix2['id'] AND $donnees_affichageChoix2['membre_choix'] == "choix2" AND $paris['id'] == $donnees_affichageChoix2['id_paris']){
+                                                    if($donnees_affichageChoix2['id_membres'] == $donnees_affichageMembreParticipantChoix2['id'] AND $donnees_affichageChoix2['membre_choix'] == "choix2" AND $paris['id'] == $donnees_affichageChoix2['id_paris']){
                                                         echo utf8_encode($donnees_affichageMembreParticipantChoix2['pseudo']);
                                                     }
                                                 }
@@ -192,7 +192,7 @@
                                 <tr>
                                     <td>
                                         <?php 
-                                            $affichageParticipant1 = $bdd->query("SELECT id, id_paris, id_membre, membre_choix FROM paris_participation WHERE id_paris=".$_POST['affichage']." ORDER BY id ASC"); 
+                                            $affichageParticipant1 = $bdd->query("SELECT id, id_paris, id_membres, membre_choix FROM paris_participation WHERE id_paris=".$_POST['affichage']." ORDER BY id ASC"); 
 
                                             $Participant1 = 0;
                                             foreach($affichageParticipant1 as $donnees_affichageParticipant1){
@@ -213,7 +213,7 @@
                                 <tr>
                                     <td>
                                         <?php 
-                                            $affichageParticipant2 = $bdd->query("SELECT id, id_paris, id_membre, membre_choix FROM paris_participation WHERE id_paris=".$_POST['affichage']." ORDER BY id ASC");
+                                            $affichageParticipant2 = $bdd->query("SELECT id, id_paris, id_membres, membre_choix FROM paris_participation WHERE id_paris=".$_POST['affichage']." ORDER BY id ASC");
 
                                             $Participant2 = 0;
                                             foreach($affichageParticipant2 as $donnees_affichageParticipant2){
