@@ -12,7 +12,15 @@
     
     $sondages = mysqli_query($bdd, "SELECT * FROM sondage_questions ORDER BY id DESC"); 
     $numbers = array("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine", "thirty", "thirty-one", "thirty-two", "thirty-three", "thirty-four", "thirty-five", "thirty-six", "thirty-seven", "thirty-eight", "thirty-nine", "forty", "forty-one", "forty-two", "forty-three", "forty-four", "forty-five", "forty-six", "forty-seven", "forty-eight", "forty-nine", "fifty", "fifty-one", "fifty-two", "fifty-three", "fifty-four", "fifty-five", "fifty-six", "fifty-seven", "fifty-eight", "fifty-nine", "sixty", "sixty-one", "sixty-two", "sixty-three", "sixty-four", "sixty-five", "sixty-six", "sixty-seven", "sixty-eight", "sixty-nine", "seventy", "seventy-one", "seventy-two", "seventy-three", "seventy-four", "seventy-five", "seventy-six", "seventy-seven", "seventy-eight", "seventy-nine", "eighty", "eighty-one", "eighty-two", "eighty-three", "eighty-four", "eighty-five", "eighty-six", "eighty-seven", "eighty-eight", "eighty-nine", "ninety", "ninety-one", "ninety-two", "ninety-three", "ninety-four", "ninety-five", "ninety-six", "ninety-seven", "ninety-eight", "ninety-nine", "hundred");
-    $aujourdhui = new DateTime();
+    
+    // Date du jour
+    $aujourdhui=time("Y-m-d H:i:s");
+    
+    // Ajout de 2h (Quand on prends le temps, il est 2 heures en retard)
+    $aujourdhui=$aujourdhui+7200;
+
+    // Repasse en format date
+    $aujourdhui=date("Y-m-d H:i:s",$aujourdhui);
 
     if(!empty($_POST)){
         $id = $_POST['id'];
@@ -53,11 +61,14 @@
             <div>
                 <div class="card-header">
                     <a class="collapsed card-link" data-toggle="collapse" href="#<?php echo $numbers[$donnees['id']]; ?>"><?php echo utf8_encode($donnees['titre']); ?>
-                        <?php 
+                        <?php                             
+                            $vote_sondage = mysqli_query($bdd, 'SELECT * FROM sondage_reponse WHERE id_questions='.$donnees['id'].' AND id_membres='.$_SESSION['idprofil'].';'); 
+                            $vote_sondage = mysqli_fetch_array($vote_sondage, MYSQLI_ASSOC);
+                            
                             $dateExpi = new DateTime($donnees['date_publication']);
                             $dateExpi->add(new DateInterval('P15D'));
 
-                            if($dateExpi->format('Y-m-d') > $aujourdhui->format('Y-m-d')){
+                            if($vote_sondage == NULL AND $donnees['open'] == 1 AND $dateExpi->format('Y-m-d H:i') > $aujourdhui){
                                 echo "<span class='badge badge-danger'>New</span>";
                             }
                         ?> 

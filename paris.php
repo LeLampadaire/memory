@@ -10,7 +10,7 @@
 		header('Location: 404.php');
     }
     
-    $paris = mysqli_query($bdd, "SELECT id, titre, mise, choix1, choix2 FROM paris ORDER BY id DESC"); 
+    $paris = mysqli_query($bdd, "SELECT id, titre, mise, choix1, choix2, date_fin FROM paris ORDER BY id DESC"); 
     $paris = mysqli_fetch_array($paris, MYSQLI_ASSOC);
 
     /* Participation totale */
@@ -21,6 +21,23 @@
         if($donnees_participationTotal['id_paris'] == $paris['id']){
             $ParticipantTotal++;
         }
+    }
+
+    // Date du jour
+    $aujourdhui=time("Y-m-d H:i:s");
+    
+    // Ajout de 2h (Quand on prends le temps, il est 2 heures en retard)
+    $aujourdhui=$aujourdhui+7200;
+
+    // Repasse en format date
+    $aujourdhui=date("Y-m-d H:i:s",$aujourdhui);
+    
+    $dateExpiParis = new DateTime($paris['date_fin']);
+
+    if($dateExpiParis->format('Y-m-d H:i') > $aujourdhui){
+        $notif = 1;
+    }else{
+        $notif = 0;
     }
 
     if(!empty($_POST)){
@@ -296,14 +313,14 @@
                     <div class="row">
                         <div class="offset-5 col-1 bg-secondary border">
                             <label class="form-check-label" for="choix1" style="color: white;">
-                                <input class="form-check-input" type="radio" name="choix" id="choix1" value="choix1" checked <?php if($vote != NULL){ echo "disabled"; }?>>
+                                <input class="form-check-input" type="radio" name="choix" id="choix1" value="choix1" checked <?php if($notif == 0 OR $vote != NULL){ echo "disabled"; }?>>
                                 <?php echo $paris['choix1']; ?>
                             </label>
                         </div>
 
                         <div class="col-1 bg-secondary border">
                             <label class="form-check-label" for="choix2" style="color: white;">
-                                <input class="form-check-input" type="radio" name="choix" id="choix2" value="choix2" <?php if($vote != NULL){ echo "disabled"; }?>>
+                                <input class="form-check-input" type="radio" name="choix" id="choix2" value="choix2" <?php if($notif == 0 OR $vote != NULL){ echo "disabled"; }?>>
                                 <?php echo $paris['choix2']; ?>
                             </label>
                         </div>
@@ -314,7 +331,7 @@
                     <input type="hidden" value="<?php echo $paris['id']; ?>" name="id">
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="checkKama" required><label class="form-check-label" for="checkKama"><strong>Confirmez votre participation !</strong></label></div>
                     <br>
-                    <?php if($vote != NULL){ 
+                    <?php if($notif == 0 OR $vote != NULL){ 
                         echo '<button class="btn btn-danger" type="button" disabled>Déjà participez !</button>';
                     }else{
                         echo '<button class="btn btn-primary" type="submit">Participez !</button>';

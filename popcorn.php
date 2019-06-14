@@ -10,9 +10,27 @@
 		header('Location: 404.php');
     }
     
-    $popcorn = mysqli_query($bdd, "SELECT id, option1, option2, option3, DATE_FORMAT(date_film, '%d/%m/%Y à %Hh%i') AS date_film_fr, film FROM popcorn ORDER BY id DESC"); 
+    $popcorn = mysqli_query($bdd, "SELECT id, option1, option2, option3, date_film, film FROM popcorn ORDER BY id DESC"); 
     $popcorn = mysqli_fetch_array($popcorn, MYSQLI_ASSOC);
-    $aujourdhui = new DateTime();
+
+    // Date du jour
+    $aujourdhui=time("Y-m-d H:i:s");
+
+    // Ajout de 2h (Quand on prends le temps, il est 2 heures en retard)
+    $aujourdhui=$aujourdhui+7200;
+
+    // Repasse en format date
+    $aujourdhui=date("Y-m-d H:i:s",$aujourdhui);
+    
+    $dateExpiParis = new DateTime($popcorn['date_film']);
+
+    if($dateExpiParis->format('Y-m-d H:i') > $aujourdhui){
+        $notif = 1;
+    }else{
+        $notif = 0;
+    }
+
+    $affichageDate = $dateExpiParis->format('d/m/Y à H:i');
 
     if(!empty($_POST)){
         $id = $_POST['id'];
@@ -56,7 +74,7 @@
             <div class="tab-pane fade show active" id="nav-accueil" role="tabpanel" aria-labelledby="nav-accueil-tab">
                 <div class="card-header">
                     <span style="font-size: 24px;"> Prochain event popcorn : </span>
-                    <span style="font-size: 24px; font-weight: bolder;"><?php echo $popcorn['date_film_fr']; ?></span>
+                    <span style="font-size: 24px; font-weight: bolder;"><?php echo $affichageDate; ?></span>
                 </div>
 
                 <div class="card-body">
@@ -69,7 +87,7 @@
                         <?php if($popcorn['option1'] != NULL){ ?>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="option" value="option1" checked <?php if($vote != NULL){ echo "disabled"; }?>>
+                                    <input class="form-check-input" type="radio" name="option" value="option1" checked <?php if($notif == 0 OR $vote != NULL){ echo "disabled"; }?>>
                                     <?php echo utf8_encode($popcorn['option1']); ?>
                                 </label>
                             </div>
@@ -78,7 +96,7 @@
                         <?php if($popcorn['option2'] != NULL){ ?>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="option" value="option2" <?php if($vote != NULL){ echo "disabled"; }?>>
+                                    <input class="form-check-input" type="radio" name="option" value="option2" <?php if($notif == 0 OR $vote != NULL){ echo "disabled"; }?>>
                                     <?php echo utf8_encode($popcorn['option2']); ?>
                                 </label>
                             </div>
@@ -87,7 +105,7 @@
                         <?php if($popcorn['option3'] != NULL){ ?>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="option" value="option3" <?php if($vote != NULL){ echo "disabled"; }?>>
+                                    <input class="form-check-input" type="radio" name="option" value="option3" <?php if($notif == 0 OR $vote != NULL){ echo "disabled"; }?>>
                                     <?php echo utf8_encode($popcorn['option3']); ?>
                                 </label>
                             </div>
@@ -95,7 +113,7 @@
 
                         <br>
                         <input type="hidden" value="<?php echo $popcorn['id']; ?>" name="id">
-                        <?php if($vote != NULL){ 
+                        <?php if($notif == 0 OR $vote != NULL){ 
                             echo '<button class="btn btn-danger" type="button" disabled>Déjà voté !</button>';
                         }else{
                             echo '<button class="btn btn-primary" type="submit">Votez !</button>';

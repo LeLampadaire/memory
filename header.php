@@ -1,10 +1,16 @@
 ﻿<?php
 if(isset($_SESSION['idprofil'])){
+
   // Date du jour
-  $aujourdhui = new DateTime();
+  $aujourdhui=time("Y-m-d H:i:s");
+  
+  // Ajout de 2h (Quand on prends le temps, il est 2 heures en retard)
+  $aujourdhui=$aujourdhui+7200;
+
+  // Repasse en format date
+  $aujourdhui=date("Y-m-d H:i:s",$aujourdhui);
 
   //News -> Messagerie
-
   $message = mysqli_query($bdd, 'SELECT COUNT(idMsg) AS Msg FROM tchat WHERE idProfil_recepteur = '.$_SESSION['idprofil'].' AND lu = 0;');
   $message = mysqli_fetch_array($message, MYSQLI_ASSOC);
   
@@ -15,28 +21,31 @@ if(isset($_SESSION['idprofil'])){
   }
 
   //News -> Sondage
-
-  $header_sondage = mysqli_query($bdd, "SELECT id, date_publication FROM sondage_questions ORDER BY date_publication DESC"); 
+  $header_sondage = mysqli_query($bdd, "SELECT id, open, date_publication FROM sondage_questions ORDER BY date_publication DESC"); 
   $header_sondage = mysqli_fetch_array($header_sondage, MYSQLI_ASSOC);
+
+  $vote_sondage = mysqli_query($bdd, 'SELECT * FROM sondage_reponse WHERE id_questions='.$header_sondage['id'].' AND id_membres='.$_SESSION['idprofil'].';'); 
+  $vote_sondage = mysqli_fetch_array($vote_sondage, MYSQLI_ASSOC);
 
   $dateExpiSondage = new DateTime($header_sondage['date_publication']);
   $dateExpiSondage->add(new DateInterval('P15D'));
-
-  if($dateExpiSondage->format('Y-m-d') > $aujourdhui->format('Y-m-d')){
+  
+  if($vote_sondage == NULL AND $header_sondage['open'] == 1 AND $dateExpiSondage->format('Y-m-d H:i') > $aujourdhui){
     $img_sondage = "icons/icons-32/sondages-new.png";
   }else{
     $img_sondage = "icons/icons-32/sondages.png";
   }
 
   //News -> Popcorn
-
   $header_popcorn = mysqli_query($bdd, "SELECT id, date_film FROM popcorn ORDER BY id DESC"); 
   $header_popcorn = mysqli_fetch_array($header_popcorn, MYSQLI_ASSOC);
 
-  $dateExpiPopcorn = new DateTime($header_popcorn['date_film']);
-  $dateExpiPopcorn->add(new DateInterval('P7D'));
+  $vote_popcorn = mysqli_query($bdd, 'SELECT * FROM popcorn_reponse WHERE id_popcorn='.$header_popcorn['id'].' AND id_membres='.$_SESSION['idprofil'].';'); 
+  $vote_popcorn = mysqli_fetch_array($vote_popcorn, MYSQLI_ASSOC);
 
-  if($dateExpiPopcorn->format('Y-m-d') > $aujourdhui->format('Y-m-d')){
+  $dateExpiPopcorn = new DateTime($header_popcorn['date_film']);
+
+  if($vote_popcorn == NULL AND $dateExpiPopcorn->format('Y-m-d H:i') > $aujourdhui){
     $img_popcorn = "icons/icons-32/popcorn-new.png";
   }else{
     $img_popcorn = "icons/icons-32/popcorn.png";
@@ -46,9 +55,12 @@ if(isset($_SESSION['idprofil'])){
   $header_paris = mysqli_query($bdd, "SELECT id, date_fin FROM paris ORDER BY id DESC"); 
   $header_paris = mysqli_fetch_array($header_paris, MYSQLI_ASSOC);
 
+  $vote_paris = mysqli_query($bdd, 'SELECT * FROM paris_participation WHERE id_paris='.$header_paris['id'].' AND id_membre='.$_SESSION['idprofil'].';'); 
+  $vote_paris = mysqli_fetch_array($vote_paris, MYSQLI_ASSOC);
+
   $dateExpiParis = new DateTime($header_paris['date_fin']);
 
-  if($dateExpiParis->format('Y-m-d') > $aujourdhui->format('Y-m-d')){
+  if($vote_paris == NULL AND $dateExpiParis->format('Y-m-d H:i') > $aujourdhui){
     $img_paris = "icons/icons-32/paris-new.png";
   }else{
     $img_paris = "icons/icons-32/paris.png";
@@ -186,7 +198,7 @@ if(isset($_SESSION['idprofil'])){
   <div class="fondMenu">
     <div id="mySidenav" class="sidenav">
       <a href="index.php" id="accueil">Accueil</a>
-        <?php if($connexion == 1){ 
+        <?php if($connexion == 1){
           echo '<a href="membres.php" id="membres">Membres</a>';
           echo '<a href="statistiques.php" id="statistiques">Statistiques</a>';
           echo '<a href="metiers.php" id="metiers">Métiers</a>';
