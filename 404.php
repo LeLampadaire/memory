@@ -34,12 +34,24 @@
                 </form>
             </div>
 
+            <?php if(!empty($_SESSION)){ ?>
+
             <div class="form-group col-md-12">
-                <form action="profil.php" method="POST">
+                <form action="index-profil.php" method="POST">
                     <button type="submit" class="btn btn-outline-light">Profil</button>
                 </form>
             </div>
+            
+            <?php }else{ ?>
+
+            <div class="form-group col-md-12">
+                <form action="connexion.php" method="POST">
+                    <button type="submit" class="btn btn-outline-warning">Connexion</button>
+                </form>
+            </div>
     
+            <?php } ?>
+
     </div>
 
     <!-- FOOTER -->

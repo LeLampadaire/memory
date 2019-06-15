@@ -3,6 +3,10 @@
 	require_once 'configuration.php';
 	require_once 'dbb_connexion.php';
 
+	if(!empty($_SESSION)){
+		header('Location: 404.php');
+	}
+
 	$error = 0;
 	if(!empty($_POST)){
 		$mdp = md5($_POST['mdp']);
