@@ -21,10 +21,8 @@
 			header('Location: index.php');
 		}
 	}
-	$connexion_class = "active";
+
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
