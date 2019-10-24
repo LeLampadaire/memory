@@ -29,5 +29,15 @@ Site crée pour la guilde Memory sur le jeu Dofus, serveur Nidas !
 ### Meneur 
 - Modification des rangs des membres
 
+## Se connecter
+=> Premier compte :
+- Nom de compte : Lampadaire
+- Mot de passe : admin
+
+=> Deuxième compte :
+- Nom de compte : Zetrox
+- Mot de passe : admin
+
+
 ## Screen 
 ![Memory](https://user-images.githubusercontent.com/41271314/67411005-3fd41b00-f5bd-11e9-99bf-4245e9b06fd8.PNG)
